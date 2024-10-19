@@ -1,4 +1,3 @@
-import java.text.NumberFormat.Style;
 
 /**
  * Tester for the DMCard class. Tests all required methods.
@@ -68,9 +67,15 @@ public class DMCardTester {
         //		then see toString() test to see if it passes)
         testFullConstructor();
         testCopyConstructor();
-        
-
-
+        testGetName();
+        testGetAliases();
+        testGetCivilization();
+        testGetCardType();
+        testGetTextbox();
+        testGetRarity();
+        testGetCost();
+        testGetHasSheildTrigger();
+        testEquals();
 
     }
 
@@ -176,7 +181,7 @@ public class DMCardTester {
         System.out.println("Setter returned: " + setterTest);
 
     }
-    
+
     public static void testSetCardType() {
         DMCard test = new DMCard();
         boolean setterTest;
@@ -208,7 +213,7 @@ public class DMCardTester {
         System.out.println("Ability should have changed to \"Power Attacker +4000\"");
         System.out.println(test);
     }
-
+    
     public static void testSetRarirty() {
         DMCard test = new DMCard();
         boolean setterTest;
@@ -405,7 +410,7 @@ public class DMCardTester {
     public static void testCopyConstructor() {
         String[] aliases = { "Gattling Skyterror", "Skyterror" };
         DMCard test = new DMCard("Gattling Skyterror", aliases, "Fire", "creature", "Double Breaker\nPower Attacker +4000",
-                    DMCard.RARITY_VERY_RARE, 6, false);
+                DMCard.RARITY_VERY_RARE, 6, false);
         System.out.println("\n==============================================");
         System.out.println("TESTING copy constructor METHOD:\n");
 
@@ -415,10 +420,18 @@ public class DMCardTester {
         try{
             DMCard copy = new DMCard(test);
             System.out.println(copy);
+            String[] shallow = {"Solary Ray", "Ray"};
+            test.setAll("Solar Ray", shallow, "light", "spell", "Tap All creatures", DMCard.RARITY_UNCOMMON, 1, true);
+            System.out.println("Changed the original. Did the copy change?");
+            System.out.println(copy);
+
         } catch (IllegalArgumentException iae) {
             System.out.println(iae.getMessage());
             System.out.println("Test failed...");
         }
+        
+
+        System.out.println();
         System.out.println("Trying to copy a null DMCard");
         try{
             DMCard copy = new DMCard(null);
@@ -428,6 +441,152 @@ public class DMCardTester {
             System.out.println("Successfully failed");
         }
 
+
+    }
+
+    public static void testGetName() {
+        DMCard test = new DMCard();
+        System.out.println("\n==============================================");
+        System.out.println("TESTING getName() METHOD:\n");
+
+        System.out.println("getName should be deafult name " + DMCard.DEFAULT_NAME + " : " + test.getName());
+        test.setName("Gattling Skyterror");
+        System.out.println("Changed name, should now be Gattling Skyterror: " + test.getName());
+    }
+
+    public static void testGetAliases() {
+        DMCard test = new DMCard();
+        System.out.println("\n==============================================");
+        System.out.println("TESTING getAliases() METHOD:\n");
+
+        System.out.println("Should have the default aliases of Belbetphlo, Wailing Shadow; Belbetphlo:");
+        System.out.println(aliasesString(test.getAliases()));
+        String[] aliases = { "Solar Ray", "Sol" };
+        test.setAliases(aliases);
+        System.out.println("Should change to Solar Ray; Sol:");
+        System.out.println(aliasesString(test.getAliases()));
+    }
+
+    public static String aliasesString(String[] aliases) {
+        String allAliases = "";
+        for (String alias : aliases) {
+            allAliases += alias + ", \n";
+        }
+        if (allAliases.length() > 0) {
+            allAliases = allAliases.substring(0, allAliases.length() - 3);
+        }
+        allAliases = "Known as: \n" + allAliases;
+        return allAliases;
+    }
+
+    public static void testGetCivilization() {
+        DMCard test = new DMCard();
+        System.out.println("\n==============================================");
+        System.out.println("TESTING getCivilization() METHOD:\n");
+
+        System.out.println("Should have the default civilization of " + DMCard.DEFAULT_CIVILIZATION + " : "
+                + test.getCivilization());
+        test.setCivilization("light");
+        System.out.println("Changed name, should now be Light: " + test.getCivilization());
+
+    }
+
+    public static void testGetCardType() {
+        DMCard test = new DMCard();
+        System.out.println("\n==============================================");
+        System.out.println("TESTING getCardType() METHOD:\n");
+
+        System.out.println(
+                "Should have the default card type of " + DMCard.DEFAULT_CARD_TYPE + " : " + test.getCardType());
+        test.setCardType("spell");
+        System.out.println("Changed type, should now be Spell: " + test.getCardType());
+    }
+    
+    public static void testGetTextbox(){
+        DMCard test = new DMCard();
+        System.out.println("\n==============================================");
+        System.out.println("TESTING getTextbox() METHOD:\n");
+
+        System.out.println("Should have the default textbox of " + DMCard.DEFAULT_TEXBOX + " : "
+                + test.getTextbox());
+        test.setTextbox("Blocker");
+        System.out.println("Changed textbox, should now be Blocker: " + test.getTextbox());
+    }
+
+    public static void testGetRarity() {
+        DMCard test = new DMCard();
+        System.out.println("\n==============================================");
+        System.out.println("TESTING getRarity() METHOD:\n");
+
+        System.out.println("Should have the default rarity of " + DMCard.DEFAULT_RARITY + " : "
+                + test.getRarity());
+        test.setRarity(DMCard.RARITY_RARE);
+        System.out.println("Changed rarity, should now be " + DMCard.RARITY_RARE + ": " + test.getRarity());
+    }
+
+    public static void testGetCost() {
+        DMCard test = new DMCard();
+        System.out.println("\n==============================================");
+        System.out.println("TESTING getCost() METHOD:\n");
+
+        System.out.println("Should have the default cost of " + DMCard.DEFAULT_COST + " : "
+                + test.getCost());
+        test.setCost(7);
+        System.out.println("Changed rarity, should now be 7: " + test.getCost());
+    }
+
+    public static void testGetHasSheildTrigger() {
+        DMCard test = new DMCard();
+        System.out.println("\n==============================================");
+        System.out.println("TESTING getHasSheildTrigger() METHOD:\n");
+
+        System.out.println("Should have the default hasSheildTrigger of " + DMCard.DEFAULT_HAS_SHEILD_TRIGGER + " : "
+                + test.getHasSheildTrigger());
+        test.setHasSheildTrigger(true);
+        System.out.println("Changed sheild trigger, should now be true : " + test.getHasSheildTrigger());
+    }
+
+    public static void testEquals() {
+        String[] aliases = { "Gattling Skyterror", "Skyterror" };
+        DMCard test1 = new DMCard("Gattling Skyterror", aliases, "Fire", "creature", "Double Breaker\nPower Attacker +4000",
+                    DMCard.RARITY_VERY_RARE, 6, false);
+        System.out.println("\n==============================================");
+        System.out.println("TESTING equals() METHOD:\n");
+        DMCard test2 = new DMCard(test1);
+
+        System.out.println("Testing equals on two equal objects. Should be true: " + test1.equals(test2));
+        test2.setName("Solar Ray");
+        System.out.println("Testing equals on two objects with different names. Should be false: " + test1.equals(test2));
+        test2 = new DMCard(test1);
+        String[] changedAlias = {"Gattling Skyterror"};
+        test2.setAliases(changedAlias);
+        System.out.println("Testing equals on two objects with different numbers of aliases. Should be false: "
+                + test1.equals(test2));
+        test2 = new DMCard(test1);
+        test2.setCivilization("nature");
+        System.out.println(
+                "Testing equals on two objects with different civilizations. Should be false: " + test1.equals(test2));
+        test2 = new DMCard(test1);
+        test2.setCardType("spell");
+        System.out.println(
+                "Testing equals on two objects with different card types. Should be false: " + test1.equals(test2));
+        test2 = new DMCard(test1);
+        test2.setTextbox("Add 1 card to your sheilds");
+        System.out.println(
+                "Testing equals on two objects with different texboxes. Should be false: " + test1.equals(test2));
+        test2 = new DMCard(test1);
+        test2.setRarity(DMCard.RARITY_COMMON);
+        System.out.println(
+                "Testing equals on two objects with different rarities. Should be false: " + test1.equals(test2));
+        test2 = new DMCard(test1);
+        test2.setCost(0);
+        System.out.println("Testing equals on two objects with different costs. Should be false: " + test1.equals(test2));
+        test2 = new DMCard(test1);
+        test2.setHasSheildTrigger(true);
+        System.out.println(
+                "Testing equals on two objects with different civilizations. Should be false: " + test1.equals(test2));
+        test2 = new DMCard("Solar Ray", changedAlias, "nature", "spell", "Add 1 card to your sheilds", DMCard.RARITY_COMMON, 0, true);
+        System.out.println("Testing equals on two objects with all fields different. Should be false: " + test1.equals(test2));
 
     }
     

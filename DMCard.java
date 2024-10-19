@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Represents a card available in the video game version of Duel Masters. Should only be created/modified by CardLink and tester classes,
  * but can be accessed by other classes to read its data.  
@@ -269,14 +271,80 @@ public class DMCard {
                 && this.setCost(cost);
     }
 
+    /****ACCESSORS *****/
+    
+    /**
+     * Getter for the Name instance var.
+     * @return A String for the full name of the Duel Masters card as seen in the card viewer
+     */
+    public String getName() {
+        return this.name;
+    }
 
+    /**
+     * Getter for aliases instance variable
+     * @return An array of Strings for each name the card is commonly reffered to by.
+     */
+    public String[] getAliases() {
+        return this.aliases;
+    }
+
+    /**
+     * Getter for civilization instance variable
+     * @return A String for which of the 5 civilizations the card is: Darkness, Fire, Light, Nature, or Water.
+     */
+    public String getCivilization(){
+        return this.civilization;
+    }
+
+    /**
+     * Getter for the card type instance variable of the DMCard object
+     * @return the type of the card, either "creature" or "spell"
+     */
+    public String getCardType() {
+        return this.cardType;
+    }
+
+    /**
+     * Getter for the textbox instance varible of the DMCard object
+     * @return A String that lists all the abilities of the card in plain text.
+     */
+    public String getTextbox() {
+        return this.textbox;
+    }
+
+    /**
+     * Getter for the rarity instance varible of the DMCard object
+     * @return an int representing the rarity of the card: 0 is Common, 1 is Uncommon, 2 is Rare, 3 is Very Rare, 
+             * 4 is Super Rare, and -1 is NONE
+     */
+    public int getRarity() {
+        return this.rarity;
+    }
+
+    /**
+     * Getter for the cost instance varible of the DMCard object
+     * @return An int for the amount of mana required to play the card
+     */
+    public int getCost() {
+        return this.cost;
+    }
+
+    /**
+     * Getter for the hasSheildTrigger instance varible of the DMCard object
+     * @return True if the card has the sheild trigger ability, false otherwise
+     */
+    public boolean getHasSheildTrigger() {
+        return hasSheildTrigger;
+    }
 
 
     /***** OTHER REQUIRED METHODS *****/
 
     @Override
     public String toString() {
-        String printString = String.format("%s%nA %s %s.%nCost: %d%nAbility: %s%nRarity: ", name, civilization, cardType,
+        String printString = String.format("%s%nA %s %s.%nCost: %d%nAbility: %s%nRarity: ", name, civilization,
+                cardType,
                 cost,
                 textbox);
         String rarityString;
@@ -313,6 +381,21 @@ public class DMCard {
         printString += "sheild trigger.";
 
         return printString;
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+
+        if ((other == null) || (! (other instanceof DMCard))){
+            return false;
+        } else{
+            DMCard otherCard = (DMCard) other;
+            return this.name.equals(otherCard.name) && Arrays.equals(this.aliases, otherCard.aliases)
+                    && this.civilization.equals(otherCard.civilization) && this.cardType.equals(otherCard.cardType)
+                    && this.textbox.equals(otherCard.textbox) && this.rarity == otherCard.rarity
+                    && this.cost == otherCard.cost && this.hasSheildTrigger == otherCard.hasSheildTrigger;
+        }
+        
     }
     
     /**
