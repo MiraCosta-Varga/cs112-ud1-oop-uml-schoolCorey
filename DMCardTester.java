@@ -1,3 +1,4 @@
+import java.text.NumberFormat.Style;
 
 /**
  * Tester for the DMCard class. Tests all required methods.
@@ -64,7 +65,9 @@ public class DMCardTester {
         testSetHasSheildTrigger();
         testSetAll();
         // - test Default Constructor (implement default constructor,
-		//		then see toString() test to see if it passes)
+        //		then see toString() test to see if it passes)
+        testFullConstructor();
+        testCopyConstructor();
         
 
 
@@ -337,17 +340,95 @@ public class DMCardTester {
 
     }
 
-    public static void testFullConstructor(){
+    public static void testFullConstructor() {
         DMCard test = new DMCard();
         System.out.println("\n==============================================");
         System.out.println("TESTING full constructor METHOD:\n");
 
         // valid data
+        System.out.println(
+                "Creating Gattling Skyterror. Should print info for Gattling Skyterror, a fire creature with double breaker and Power Attacker +4000. Rarity should be very rare, cost 6, no sheild trigger");
+        String[] aliases = { "Gattling Skyterror", "Skyterror" };
         try {
-            test = new DMCard("Gattling Skyterror", null, null, null, null, 0, 0, false)
+            test = new DMCard("Gattling Skyterror", aliases, "Fire", "creature", "Double Breaker\nPower Attacker +4000",
+                    DMCard.RARITY_VERY_RARE, 6, false);
+            System.out.println(test);
         } catch (IllegalArgumentException iae) {
-            // TODO: handle exception
+            System.out.println(iae.getMessage());
+            System.out.println("Test failed somewhere. Check code");
         }
+
+        aliases = new String[1];
+        aliases[0] = "Solar Ray";
+        System.out.println();
+        System.out.println(
+                "Creating Solar Ray. Should print info for Solar Ray, a yellow spell that taps all creatures. Rarity should be NONE, cost 1, has sheild trigger.");
+        try {
+            test = new DMCard("Solar Ray", aliases, "yellow", "spell", "Tap all creatures", DMCard.RARITY_NONE, 1,
+                    true);
+            System.out.println(test);
+        } catch (IllegalArgumentException iae) {
+            System.out.println(iae.getMessage());
+            System.out.println("Test failed somewhere. Check code");
+        }
+
+        System.out.println("Trying to create a card of Purple Civilization");
+        constructorFailTests("Solar Ray", aliases, "purple", "spell", "Untap all creatures", DMCard.RARITY_UNCOMMON, 4,
+                true);
+        System.out.println("Trying to create a card of Trap type");
+        constructorFailTests("Solar Ray", aliases, "light", "trap", "Untap all creatures", DMCard.RARITY_UNCOMMON, 4,
+                true);
+        System.out.println("Trying to create a card of invalid rarity");
+        constructorFailTests("Solar Ray", aliases, "light", "trap", "Untap all creatures", 99, 4, true);
+        System.out.println("Trying to create a card of negative cost");
+        constructorFailTests("Solar Ray", aliases, "light", "spell", "Untap all creatures", DMCard.RARITY_UNCOMMON, -4,
+                true);
+        aliases = new String[0];
+        System.out.println("Trying to create a card with no aliases");
+        constructorFailTests("Solar Ray", aliases, "light", "spell", "Untap all creatures", DMCard.RARITY_UNCOMMON, 4, true);
+
+
+    }
+    
+    public static void constructorFailTests(String name, String[] aliases, String civilization, String cardType, String textbox,
+            int rarity, int cost, boolean hasSheildTrigger) {
+        DMCard test;
+        try {
+            test = new DMCard(name, aliases, civilization, cardType, textbox, rarity, cost, hasSheildTrigger);
+            System.out.println("The card was created? That shouldn't happen");
+        } catch (IllegalArgumentException iae) {
+            System.out.println(iae.getMessage());
+            System.out.println("Successfully failed.");
+        }
+    }
+
+    public static void testCopyConstructor() {
+        String[] aliases = { "Gattling Skyterror", "Skyterror" };
+        DMCard test = new DMCard("Gattling Skyterror", aliases, "Fire", "creature", "Double Breaker\nPower Attacker +4000",
+                    DMCard.RARITY_VERY_RARE, 6, false);
+        System.out.println("\n==============================================");
+        System.out.println("TESTING copy constructor METHOD:\n");
+
+        System.out.println("Trying to copy a Gattling Skyterror.");
+        System.out.println(
+                "Should print info for Gattling Skyterror, a fire creature with double breaker and Power Attacker +4000. Rarity should be very rare, cost 6, no sheild trigger");
+        try{
+            DMCard copy = new DMCard(test);
+            System.out.println(copy);
+        } catch (IllegalArgumentException iae) {
+            System.out.println(iae.getMessage());
+            System.out.println("Test failed...");
+        }
+        System.out.println("Trying to copy a null DMCard");
+        try{
+            DMCard copy = new DMCard(null);
+            System.out.println(copy);
+        } catch (IllegalArgumentException iae) {
+            System.out.println(iae.getMessage());
+            System.out.println("Successfully failed");
+        }
+
+
     }
     
     

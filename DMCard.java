@@ -37,8 +37,13 @@ public class DMCard {
 
     /**** CONSTRUCTORS ****/
 
+    /**
+     * Default constructor for DMCard. Defaults to the information for Belbetphlo, Wailing Shadow; the first card in
+     * the game's initial search ordering.
+     */
     public DMCard() {
-
+        this(DEFAULT_NAME, DEFAULT_ALIASES, DEFAULT_CIVILIZATION, DEFAULT_CARD_TYPE, DEFAULT_TEXBOX, DEFAULT_RARITY,
+                DEFAULT_COST, DEFAULT_HAS_SHEILD_TRIGGER);
     }
 
     /**
@@ -57,6 +62,8 @@ public class DMCard {
      *      Super Rare (4), and NONE (-1).
      * @param cost An int representing the amount of mana required to play the card. Must be >= 0.
      * @param hasSheildTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
+     * @throws IllegalArgumentException if any argument was invalid as seen in the param sections, will throw this exception with a messeage
+     *      that includes some of the more likely mistakes that have been made.
      */
     public DMCard(String name, String[] aliases, String civilization, String cardType, String textbox,
             int rarity, int cost, boolean hasSheildTrigger) throws IllegalArgumentException {
@@ -65,8 +72,9 @@ public class DMCard {
             message += "The valid civilizations are:\n";
             for (String civ : CIVILIZATIONS) {
                 message += civ + ", ";
-                message = message.substring(0, message.length() - 2);
             }
+            message = message.substring(0, message.length() - 2);
+            message += "\nYour inputted civilization: " + civilization;
             message += "\nOr perhaps rarity was out of bounds. It only goes up to Super Rare (" + RARITY_SUPER_RARE
                     + ")";
             throw new IllegalArgumentException(message);
@@ -74,6 +82,21 @@ public class DMCard {
 
         // May later implement a check here to see if the first entry in Aliases matches the instance variable for name.
     }
+
+    /**
+     * Copy Constructor for DMCard class
+     * @param original The original DMCard to be copied. Cannot be null.
+     * @throws IllegalArgumentException If the original DMCard was null, throws this excpetion with an error message.
+     */
+    public DMCard(DMCard original) throws IllegalArgumentException {
+        if (original == null) {
+            throw new IllegalArgumentException("ERROR: Null arugment passed to DMCard copy constructor");
+        }
+        this.setAll(original.name, original.aliases, original.civilization, original.cardType, original.textbox,
+                original.rarity, original.cost, original.hasSheildTrigger);
+    }
+
+    
     
 
     /*** MUTATORS ***/
