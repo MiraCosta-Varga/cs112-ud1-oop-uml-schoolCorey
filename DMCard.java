@@ -13,13 +13,16 @@ public class DMCard {
     public static final int RARITY_VERY_RARE = 3;
     public static final int RARITY_SUPER_RARE = 4;
 
+    public static final int CARDTYPE_CREATURE = 0;
+    public static final int CARDTYPE_SPELL = 1;
+
     public static final String[] CIVILIZATIONS = { "Darkness", "Fire", "Light", "Nature", "Water" };
 
     // Default constats, defaults to the information for Belbetphlo, Wailing Shadow; the first card in the game's initial search ordering.
     public static final String DEFAULT_NAME = "Belbetphlo, Wailing Shadow";
     public static final String[] DEFAULT_ALIASES = { "Belpetphlo, Wailing Shadow", "Belbetphlo" };
     public static final String DEFAULT_CIVILIZATION = "Darkness";
-    public static final String DEFAULT_CARD_TYPE = "creature";
+    public static final int DEFAULT_CARD_TYPE = CARDTYPE_CREATURE;
     public static final String DEFAULT_TEXBOX = "Slayer";
     public static final int DEFAULT_RARITY = RARITY_COMMON;
     public static final int DEFAULT_COST = 3;
@@ -31,7 +34,7 @@ public class DMCard {
     private String[] aliases = new String[2]; //Array for all possible names to search by. Usually contatins the full name of the card
                                               // and a shortened version, such as the first word in the card or the name seen during gameplay.
     private String civilization;
-    private String cardType;
+    private int cardType;
     private String textbox;
     private int rarity;
     private int cost;
@@ -55,8 +58,7 @@ public class DMCard {
      *      The first entry in the array should be the same as the card's Name value, but is not checked at this point.
      * @param civilization A string representing the Duel Masters civilization (color) of the card. Capitalization doesn't matter.
      *      Valid Strings are Fire, Red, Water, Blue, Nature, Green, Darkness, Black, Light, Yellow, and White.
-     * @param cardType A string for the card type of the card. Valid values are "creature" and "spell".
-     *      capitalization doesn't matter, and "monster" is a valid substitue for "creature".
+     * @param cardType an int using the CARDTYPE_... constants for Creature or Spell
      * @param textbox A String for the text of the ability for the card. Includes static ablilities such as Sheild Trigger/Power
      *      Attacker as well as one-shot ablilities that only happen when the card is played. Multiple abilities should be
      *      shown on multiple lines in the single textbox variable
@@ -67,7 +69,7 @@ public class DMCard {
      * @throws IllegalArgumentException if any argument was invalid as seen in the param sections, will throw this exception with a messeage
      *      that includes some of the more likely mistakes that have been made.
      */
-    public DMCard(String name, String[] aliases, String civilization, String cardType, String textbox,
+    public DMCard(String name, String[] aliases, String civilization, int cardType, String textbox,
             int rarity, int cost, boolean hasSheildTrigger) throws IllegalArgumentException {
         if (!this.setAll(name, aliases, civilization, cardType, textbox, rarity, cost, hasSheildTrigger)) {
             String message = "One or more fields were invalid. Most likely, you had an invalid civilization.\n";
@@ -164,22 +166,18 @@ public class DMCard {
 
 
     /**
-     * Setter for CardType instance variable. This is simply a String, NOT the child class card type
-     * @param cardType A string for the card type of the card. Valid values are "creature" and "spell".
-     *      capitalization doesn't matter, and "monster" is a valid substitue for "creature".
+     * Setter for CardType instance variable. This is an int, where 0 represents a creature and 1 represents
+     * a spell. see the CARDTYPE static variables for reference
+     * @param cardType an int using the CARDTYPE_... constants for Creature or Spell
      * @return true if the parameter was valid and thus the cardType was set, false otherwise.
      */
-    public boolean setCardType(String cardType) {
+    public boolean setCardType(int cardType) {
         boolean valid = true;
-        String type = cardType.toLowerCase();
-        if (type.equals("monster") || type.equals("creature")) {
-            this.cardType = "creature";
-        } else if (type.equals("spell")) {
-            this.cardType = "spell";
-        } else {
+        if((cardType == CARDTYPE_CREATURE) || (cardType == CARDTYPE_SPELL) ){
+            this.cardType = cardType;
+        }else{
             valid = false;
         }
-
         return valid;
     }
     
@@ -251,8 +249,7 @@ public class DMCard {
      *      The first entry in the array should be the same as the card's Name value, but is not checked at this point.
      * @param civilization A string representing the Duel Masters civilization (color) of the card. Capitalization doesn't matter.
      *      Valid Strings are Fire, Red, Water, Blue, Nature, Green, Darkness, Black, Light, Yellow, and White.
-     * @param cardType A string for the card type of the card. Valid values are "creature" and "spell".
-     *      capitalization doesn't matter, and "monster" is a valid substitue for "creature".
+     * @param cardType an int using the CARDTYPE_... constants for Creature or Spell
      * @param textbox A String for the text of the ability for the card. Includes static ablilities such as Sheild Trigger/Power
      *      Attacker as well as one-shot ablilities that only happen when the card is played. Multiple abilities should be
      *      shown on multiple lines in the single textbox variable
@@ -262,7 +259,7 @@ public class DMCard {
      * @param hasSheildTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
      * @return True if all parameters were valid and have been set properly, false if one or more parameters were not set properly.
      */
-    public boolean setAll(String name, String[] aliases, String civilization, String cardType, String textbox,
+    public boolean setAll(String name, String[] aliases, String civilization, int cardType, String textbox,
             int rarity, int cost, boolean hasSheildTrigger) {
         this.setName(name);
         this.setTextbox(textbox);
@@ -299,9 +296,9 @@ public class DMCard {
 
     /**
      * Getter for the card type instance variable of the DMCard object
-     * @return the type of the card, either "creature" or "spell"
+     * @return the type of the card, either CARDTYPE_CREATURE or CARDTYPE_SPELL
      */
-    public String getCardType() {
+    public int getCardType() {
         return this.cardType;
     }
 
@@ -343,8 +340,17 @@ public class DMCard {
 
     @Override
     public String toString() {
+        String typeString;
+        switch (cardType){
+            case CARDTYPE_CREATURE:
+                typeString = "creature";
+            case CARDTYPE_SPELL:
+                typeString = "spell";
+            default:
+                typeString = "INVALID_TYPE";
+        }
         String printString = String.format("%s%nA %s %s.%nCost: %d%nAbility: %s%nRarity: ", name, civilization,
-                cardType,
+                typeString,
                 cost,
                 textbox);
         String rarityString;
@@ -391,7 +397,7 @@ public class DMCard {
         } else{
             DMCard otherCard = (DMCard) other;
             return this.name.equals(otherCard.name) && Arrays.equals(this.aliases, otherCard.aliases)
-                    && this.civilization.equals(otherCard.civilization) && this.cardType.equals(otherCard.cardType)
+                    && this.civilization.equals(otherCard.civilization) && (this.cardType==otherCard.cardType)
                     && this.textbox.equals(otherCard.textbox) && this.rarity == otherCard.rarity
                     && this.cost == otherCard.cost && this.hasSheildTrigger == otherCard.hasSheildTrigger;
         }
