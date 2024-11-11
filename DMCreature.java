@@ -43,6 +43,10 @@ public class DMCreature extends DMCard{
      *      Super Rare (4), and NONE (-1).
      * @param cost An int representing the amount of mana required to play the card. Must be >= 0.
      * @param hasSheildTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
+     * @param power An int for the base power of the creature card. Must be >=0; doesn't count in-game modifiers
+     * @param race A string for the race of the card. Valid values are found in the VALID_RACES array,
+     * and some shorthands are accepted. Capitalization doesn't matter.
+     * @param isEvolution True if the creature is an evolution creature; false if it is not.
      * @throws IllegalArgumentException if any argument was invalid as seen in the param sections, will throw this exception with a messeage
      *      that includes some of the more likely mistakes that have been made.
      */
@@ -175,6 +179,8 @@ public class DMCreature extends DMCard{
      * and some shorthands are accepted. Capitalization doesn't matter.
      * @param isEvolution True if the creature is an evolution creature; false if it is not.
      * @return True if all parameters were valid and have been set properly, false if one or more parameters were not set properly.
+     * @throws IllegalArgumentException if the race argument was invalid, will throw this exception with a message
+     * that includes some of the more likely mistakes that have been made.
      */
     public boolean setAll(String name, String[] aliases, String civilization, String cardType, String textbox,
                           int rarity, int cost, boolean hasSheildTrigger,int power, String race, boolean isEvolution) throws IllegalArgumentException{
