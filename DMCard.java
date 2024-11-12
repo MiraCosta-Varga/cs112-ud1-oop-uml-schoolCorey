@@ -16,29 +16,35 @@ public class DMCard {
     public static final int CARDTYPE_CREATURE = 0;
     public static final int CARDTYPE_SPELL = 1;
 
+    public static final int CIVILIZATION_DARKNESS = 0;
+    public static final int CIVILIZATION_FIRE = 1;
+    public static final int CIVILIZATION_LIGHT = 2;
+    public static final int CIVILIZATION_NATURE = 3;
+    public static final int CIVILIZATION_WATER = 4;
+
     public static final String[] CIVILIZATIONS = { "Darkness", "Fire", "Light", "Nature", "Water" };
 
     // Default constats, defaults to the information for Belbetphlo, Wailing Shadow; the first card in the game's initial search ordering.
     public static final String DEFAULT_NAME = "Belbetphlo, Wailing Shadow";
     public static final String[] DEFAULT_ALIASES = { "Belpetphlo, Wailing Shadow", "Belbetphlo" };
-    public static final String DEFAULT_CIVILIZATION = "Darkness";
+    public static final int DEFAULT_CIVILIZATION = CIVILIZATION_DARKNESS;
     public static final int DEFAULT_CARD_TYPE = CARDTYPE_CREATURE;
-    public static final String DEFAULT_TEXBOX = "Slayer";
+    public static final String DEFAULT_TEXTBOX = "Slayer";
     public static final int DEFAULT_RARITY = RARITY_COMMON;
     public static final int DEFAULT_COST = 3;
-    public static final boolean DEFAULT_HAS_SHEILD_TRIGGER = false; 
+    public static final boolean DEFAULT_HAS_SHIELD_TRIGGER = false; //SHEILD SHIELD
 
     /*Instance Variables */
 
     private String name;
     private String[] aliases = new String[2]; //Array for all possible names to search by. Usually contatins the full name of the card
                                               // and a shortened version, such as the first word in the card or the name seen during gameplay.
-    private String civilization;
+    private int civilization;
     private int cardType;
     private String textbox;
     private int rarity;
     private int cost;
-    private boolean hasSheildTrigger;
+    private boolean hasShieldTrigger;
 
     /**** CONSTRUCTORS ****/
 
@@ -47,8 +53,8 @@ public class DMCard {
      * the game's initial search ordering.
      */
     public DMCard() {
-        this(DEFAULT_NAME, DEFAULT_ALIASES, DEFAULT_CIVILIZATION, DEFAULT_CARD_TYPE, DEFAULT_TEXBOX, DEFAULT_RARITY,
-                DEFAULT_COST, DEFAULT_HAS_SHEILD_TRIGGER);
+        this(DEFAULT_NAME, DEFAULT_ALIASES, DEFAULT_CIVILIZATION, DEFAULT_CARD_TYPE, DEFAULT_TEXTBOX, DEFAULT_RARITY,
+                DEFAULT_COST, DEFAULT_HAS_SHIELD_TRIGGER);
     }
 
     /**
@@ -56,8 +62,7 @@ public class DMCard {
      * @param name A String for the full name of the Duel Masters card in the card viewer, NOT the shortened version occasionally used in-game
      * @param aliases A String array containing names that the card is commonly referred as. Needs a length > 0.
      *      The first entry in the array should be the same as the card's Name value, but is not checked at this point.
-     * @param civilization A string representing the Duel Masters civilization (color) of the card. Capitalization doesn't matter.
-     *      Valid Strings are Fire, Red, Water, Blue, Nature, Green, Darkness, Black, Light, Yellow, and White.
+     * @param civilization An int representing the Duel Masters civilization (color) of the card. Use CIVILIZATION_... constants
      * @param cardType an int using the CARDTYPE_... constants for Creature or Spell
      * @param textbox A String for the text of the ability for the card. Includes static ablilities such as Sheild Trigger/Power
      *      Attacker as well as one-shot ablilities that only happen when the card is played. Multiple abilities should be
@@ -65,13 +70,13 @@ public class DMCard {
      * @param rarity An int representing the rarity of the card. Valid values are Common(0), Uncommon(1), Rare(2), Very Rare (3),
      *      Super Rare (4), and NONE (-1).
      * @param cost An int representing the amount of mana required to play the card. Must be >= 0.
-     * @param hasSheildTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
+     * @param hasShieldTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
      * @throws IllegalArgumentException if any argument was invalid as seen in the param sections, will throw this exception with a messeage
      *      that includes some of the more likely mistakes that have been made.
      */
-    public DMCard(String name, String[] aliases, String civilization, int cardType, String textbox,
-            int rarity, int cost, boolean hasSheildTrigger) throws IllegalArgumentException {
-        if (!this.setAll(name, aliases, civilization, cardType, textbox, rarity, cost, hasSheildTrigger)) {
+    public DMCard(String name, String[] aliases, int civilization, int cardType, String textbox,
+            int rarity, int cost, boolean hasShieldTrigger) throws IllegalArgumentException {
+        if (!this.setAll(name, aliases, civilization, cardType, textbox, rarity, cost, hasShieldTrigger)) {
             String message = "One or more fields were invalid. Most likely, you had an invalid civilization.\n";
             message += "The valid civilizations are:\n";
             for (String civ : CIVILIZATIONS) {
@@ -97,7 +102,7 @@ public class DMCard {
             throw new IllegalArgumentException("ERROR: Null arugment passed to DMCard copy constructor");
         }
         this.setAll(original.name, original.aliases, original.civilization, original.cardType, original.textbox,
-                original.rarity, original.cost, original.hasSheildTrigger);
+                original.rarity, original.cost, original.hasShieldTrigger);
     }
 
     
@@ -139,29 +144,16 @@ public class DMCard {
     /**
      * Setter for the civilization instance variable. Sets the card to be one of the five Duel Masters civilizations:
      * Fire, Water, Nature, Darkness, or Light.
-     * @param civilization A string representing the Duel Masters civilization (color) of the card. Capitalization doesn't matter.
-     *      Valid Strings are Fire, Red, Water, Blue, Nature, Green, Darkness, Black, Light, Yellow, and White.
+     * @param civilization An int representing the Duel Masters civilization (color) of the card. Use CIVILIATION_... constants
      * @return true if civilization param was a valid value and the string was set, False if it was not valid and thus not set.
      */
-    public boolean setCivilization(String civilization) {
-        String civ = civilization.toLowerCase();
-        boolean validColor = true;
-
-        if (civ.equals("fire") || civ.equals("red")) {
-            this.civilization = "Fire";
-        } else if (civ.equals("light") || civ.equals("yellow") || civ.equals("white")) {
-            this.civilization = "Light";
-        } else if (civ.equals("water") || civ.equals("blue")) {
-            this.civilization = "Water";
-        } else if (civ.equals("nature") || civ.equals("green")) {
-            this.civilization = "Nature";
-        } else if (civ.equals("darkness") || civ.equals("black")) {
-            this.civilization = "Darkness";
-        } else {
-            validColor = false;
+    public boolean setCivilization(int civilization) {
+        if ((civilization>CIVILIZATION_WATER)||(civilization<0)){
+            return false;
+        }else{
+            this.civilization = civilization;
+            return true;
         }
-
-        return validColor;
     }
 
 
@@ -235,10 +227,10 @@ public class DMCard {
     /**
      * Setter for hasSheildTrigger instance var. hasSheildTrigger becomes true if the card has the
      * "Sheild Trigger" ability, false if it does not have it.
-     * @param hasSheildTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
+     * @param hasShieldTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
      */
-    public void setHasSheildTrigger(boolean hasSheildTrigger) {
-        this.hasSheildTrigger = hasSheildTrigger;
+    public void setHasShieldTrigger(boolean hasShieldTrigger) {
+        this.hasShieldTrigger = hasShieldTrigger;
     }
     
     /**
@@ -259,11 +251,11 @@ public class DMCard {
      * @param hasSheildTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
      * @return True if all parameters were valid and have been set properly, false if one or more parameters were not set properly.
      */
-    public boolean setAll(String name, String[] aliases, String civilization, int cardType, String textbox,
+    public boolean setAll(String name, String[] aliases, int civilization, int cardType, String textbox,
             int rarity, int cost, boolean hasSheildTrigger) {
         this.setName(name);
         this.setTextbox(textbox);
-        this.setHasSheildTrigger(hasSheildTrigger);
+        this.setHasShieldTrigger(hasSheildTrigger);
         return this.setAliases(aliases) && this.setCivilization(civilization) && this.setCardType(cardType) && this.setRarity(rarity)
                 && this.setCost(cost);
     }
@@ -288,9 +280,9 @@ public class DMCard {
 
     /**
      * Getter for civilization instance variable
-     * @return A String for which of the 5 civilizations the card is: Darkness, Fire, Light, Nature, or Water.
+     * @return An int for which of the 5 civilizations the card is: Darkness(0), Fire(1), Light(2), Nature(3), or Water(4).
      */
-    public String getCivilization(){
+    public int getCivilization(){
         return this.civilization;
     }
 
@@ -331,8 +323,8 @@ public class DMCard {
      * Getter for the hasSheildTrigger instance varible of the DMCard object
      * @return True if the card has the sheild trigger ability, false otherwise
      */
-    public boolean getHasSheildTrigger() {
-        return hasSheildTrigger;
+    public boolean getHasShieldTrigger() {
+        return hasShieldTrigger;
     }
 
 
@@ -349,7 +341,22 @@ public class DMCard {
             default:
                 typeString = "INVALID_TYPE";
         }
-        String printString = String.format("%s%nA %s %s.%nCost: %d%nAbility: %s%nRarity: ", name, civilization,
+        String civString;
+        switch (civilization){
+            case CIVILIZATION_DARKNESS:
+                civString = "Darkness";
+            case CIVILIZATION_FIRE:
+                civString = "Fire";
+            case CIVILIZATION_LIGHT:
+                civString = "Light";
+            case CIVILIZATION_NATURE:
+                civString = "Nature";
+            case CIVILIZATION_WATER:
+                civString = "Water";
+            default:
+                civString = "UNKOWN_CIVILIZATION";
+        }
+        String printString = String.format("%s%nA %s %s.%nCost: %d%nAbility: %s%nRarity: ", name, civString,
                 typeString,
                 cost,
                 textbox);
@@ -379,7 +386,7 @@ public class DMCard {
                 break;
         }
         printString += rarityString + "\n";
-        if (hasSheildTrigger) {
+        if (hasShieldTrigger) {
             printString += "Has ";
         } else {
             printString += "Doesn't have ";
@@ -397,9 +404,9 @@ public class DMCard {
         } else{
             DMCard otherCard = (DMCard) other;
             return this.name.equals(otherCard.name) && Arrays.equals(this.aliases, otherCard.aliases)
-                    && this.civilization.equals(otherCard.civilization) && (this.cardType==otherCard.cardType)
+                    && (this.civilization==otherCard.civilization) && (this.cardType==otherCard.cardType)
                     && this.textbox.equals(otherCard.textbox) && this.rarity == otherCard.rarity
-                    && this.cost == otherCard.cost && this.hasSheildTrigger == otherCard.hasSheildTrigger;
+                    && this.cost == otherCard.cost && this.hasShieldTrigger == otherCard.hasShieldTrigger;
         }
         
     }

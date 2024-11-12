@@ -23,8 +23,8 @@ public class DMCreature extends DMCard{
      * the game's initial search ordering.
      */
     public DMCreature() {
-        this(DEFAULT_NAME, DEFAULT_ALIASES, DEFAULT_CIVILIZATION, DEFAULT_CARD_TYPE, DEFAULT_TEXBOX, DEFAULT_RARITY,
-                DEFAULT_COST, DEFAULT_HAS_SHEILD_TRIGGER,DEFAULT_POWER,DEFAULT_RACE,DEFAULT_IS_EVOLUTION);
+        this(DEFAULT_NAME, DEFAULT_ALIASES, DEFAULT_CIVILIZATION, DEFAULT_CARD_TYPE, DEFAULT_TEXTBOX, DEFAULT_RARITY,
+                DEFAULT_COST, DEFAULT_HAS_SHIELD_TRIGGER,DEFAULT_POWER,DEFAULT_RACE,DEFAULT_IS_EVOLUTION);
     }
 
     /**
@@ -32,8 +32,7 @@ public class DMCreature extends DMCard{
      * @param name A String for the full name of the Duel Masters card in the card viewer, NOT the shortened version occasionally used in-game
      * @param aliases A String array containing names that the card is commonly referred as. Needs a length > 0.
      *      The first entry in the array should be the same as the card's Name value, but is not checked at this point.
-     * @param civilization A string representing the Duel Masters civilization (color) of the card. Capitalization doesn't matter.
-     *      Valid Strings are Fire, Red, Water, Blue, Nature, Green, Darkness, Black, Light, Yellow, and White.
+     * @param civilization An int representing the Duel Masters civilization (color) of the card. Use CIVILIZATION_... constants
      * @param cardType an int using the CARDTYPE_... constants for Creature or Spell
      * @param textbox A String for the text of the ability for the card. Includes static ablilities such as Sheild Trigger/Power
      *      Attacker as well as one-shot ablilities that only happen when the card is played. Multiple abilities should be
@@ -49,7 +48,7 @@ public class DMCreature extends DMCard{
      * @throws IllegalArgumentException if any argument was invalid as seen in the param sections, will throw this exception with a messeage
      *      that includes some of the more likely mistakes that have been made.
      */
-    public DMCreature(String name, String[] aliases, String civilization, int cardType, String textbox,
+    public DMCreature(String name, String[] aliases, int civilization, int cardType, String textbox,
                   int rarity, int cost, boolean hasSheildTrigger, int power, String race, boolean isEvolution) throws IllegalArgumentException {
         if (!this.setAll(name, aliases, civilization, cardType, textbox, rarity, cost, hasSheildTrigger, power,race,isEvolution)) {
             String message = "One or more fields were invalid. Most likely, you had an invalid civilization.\n";
@@ -180,7 +179,7 @@ public class DMCreature extends DMCard{
      * @throws IllegalArgumentException if the race argument was invalid, will throw this exception with a message
      * that includes some of the more likely mistakes that have been made.
      */
-    public boolean setAll(String name, String[] aliases, String civilization, int cardType, String textbox,
+    public boolean setAll(String name, String[] aliases, int civilization, int cardType, String textbox,
                           int rarity, int cost, boolean hasSheildTrigger,int power, String race, boolean isEvolution) throws IllegalArgumentException{
         this.setIsEvolution(isEvolution);
         boolean raceValid = this.setRace(race);
