@@ -1,19 +1,56 @@
+import java.util.Arrays;
+
 public class DMCreature extends DMCard{
     /***CONSTANTS***/
+
+    public static final int RACE_GHOST = 0;
+    public static final int RACE_BRAIN_JACKER = 1;
+    public static final int RACE_LIVING_DEAD = 2;
+    public static final int RACE_DEMON_COMMAND = 3;
+    public static final int RACE_CHIMERA = 4;
+    public static final int RACE_PARASITE_WORM = 5;
+    public static final int RACE_HEDRIAN = 6;
+    public static final int RACE_DARK_LORD = 7;
+
+    public static final int RACE_ARMORED_DRAGON = 8;
+    public static final int RACE_HUMAN = 9;
+    public static final int RACE_DRAGONOID = 10;
+    public static final int RACE_ROCK_BEAST = 11;
+    public static final int RACE_ARMORED_WYVERN = 12;
+    public static final int RACE_MACHINE_EATER = 13;
+    public static final int RACE_ARMORLOID = 14;
+
+    public static final int RACE_ANGEL_COMMAND = 15;
+    public static final int RACE_LIGHT_BRINGER = 16;
+    public static final int RACE_GUARDIAN = 17;
+    public static final int RACE_STARLIGHT_TREE = 18;
+    public static final int RACE_INITIATE = 19;
+    public static final int RACE_BERSERKER = 20;
+    public static final int RACE_MECHA_THUNDER = 21;
+
+    public static final int RACE_BEAST_FOLK = 22;
+    public static final int RACE_GIANT = 23;
+    public static final int RACE_GIANT_INSECT = 24;
+    public static final int RACE_TREE_FOLK = 25;
+    public static final int RACE_HORNED_BEAST = 26;
+
+    public static final int RACE_LIQUID_PEOPLE = 27;
+    public static final int RACE_CYBER_VIRUS = 28;
+    public static final int RACE_CYBER_LORD = 29;
+    public static final int RACE_LEVIATHAN = 30;
+    public static final int RACE_GEL_FISH = 31;
+    public static final int RACE_FISH = 32;
+
+    public static final int LAST_RACE = RACE_FISH;
+
+
     //defaults to Belbetphlo
     public static final int DEFAULT_POWER = 1000;
-    public static final String DEFAULT_RACE = "Ghost";
+    public static final int DEFAULT_RACE = RACE_GHOST;
     public static final boolean DEFAULT_IS_EVOLUTION = false;
 
-    //default races
-    public static final String[] VALID_RACES =
-            {"ghost","brain jacker","living dead","demon command","chimera","parasite worm","hedrian","dark lord",
-            "armored dragon","human","dragonoid","rock beast","armored wyvern","machine eater","armorloid",
-            "angel command","light bringer","guardian","starlight tree","initiate","berserker","mecha thunder",
-            "beast folk","giant","giant insect","tree folk","horned beast",
-            "liquid people","cyber virus","cyber lord","leviathan","gel fish","fish"};
     int power;
-    String race;
+    int race;
     boolean isEvolution;
 
     /**** CONSTRUCTORS ****/
@@ -42,14 +79,13 @@ public class DMCreature extends DMCard{
      * @param cost An int representing the amount of mana required to play the card. Must be >= 0.
      * @param hasSheildTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
      * @param power An int for the base power of the creature card. Must be >=0; doesn't count in-game modifiers
-     * @param race A string for the race of the card. Valid values are found in the VALID_RACES array,
-     * and some shorthands are accepted. Capitalization doesn't matter.
+     * @param race An int represending the race of the card. Use RACE_... constants.
      * @param isEvolution True if the creature is an evolution creature; false if it is not.
      * @throws IllegalArgumentException if any argument was invalid as seen in the param sections, will throw this exception with a messeage
      *      that includes some of the more likely mistakes that have been made.
      */
     public DMCreature(String name, String[] aliases, int civilization, int cardType, String textbox,
-                  int rarity, int cost, boolean hasSheildTrigger, int power, String race, boolean isEvolution) throws IllegalArgumentException {
+                  int rarity, int cost, boolean hasSheildTrigger, int power, int race, boolean isEvolution) throws IllegalArgumentException {
         if (!this.setAll(name, aliases, civilization, cardType, textbox, rarity, cost, hasSheildTrigger, power,race,isEvolution)) {
             String message = "One or more fields were invalid. Most likely, you had an invalid civilization.\n";
             message += "The valid civilizations are:\n";
@@ -85,65 +121,17 @@ public class DMCreature extends DMCard{
 
     /**
      * Setter for setRace instance variable. This is simply a String.
-     * @param cardRace A string for the race of the card. Valid values are found in the VALID_RACES array,
-     * and some shorthands are accepted. Capitalization doesn't matter.
+     * @param race An int represending the race of the card. Use RACE_... constants.
      * @return true if the parameter was valid and thus the cardRace was set, false otherwise.
      */
-    public boolean setRace(String cardRace) {
+    public boolean setRace(int race) {
         boolean valid = true;
-        if(cardRace==null){
+        if((race<0)||(race>LAST_RACE)){
             return false;
-        }
-        String race = cardRace.toLowerCase();
-        //Check if the param is exactly a valid race
-        if(UtilityBelt.arrayContains(VALID_RACES,race)){
+        }else {
             this.race = race;
-        // Now go on to check for shorthand equivalents
-        } else if (race.equals("jack")) {
-            this.race = "brain jacker";
-        } else if (race.equals("zombie")) {
-            this.race = "living dead";
-        }else if (race.equals("demon")) {
-            this.race = "demon command";
-        }else if (race.equals("worm")) {
-            this.race = "parasite worm";
-        }else if (race.equals("vamp")) {
-            this.race = "dark lord";
-        }else if (race.equals("armd")) {
-            this.race = "armored dragon";
-        }else if (race.equals("armw")) {
-            this.race = "armored wyvern";
-        }else if (race.equals("noid")) {
-            this.race = "dragonoid";
-        }else if (race.equals("rock")) {
-            this.race = "rock beast";
-        }else if (race.equals("eater")) {
-            this.race = "machine eater";
-        }else if (race.equals("angel")) {
-            this.race = "angel command";
-        }else if (race.equals("bringer")) {
-            this.race = "light bringer";
-        }else if (race.equals("star tree")) {
-            this.race = "starlight tree";
-        }else if (race.equals("thunder")) {
-            this.race = "mecha thunder";
-        }else if (race.equals("insect")) {
-            this.race = "giant insect";
-        }else if (race.equals("horn")) {
-            this.race = "horned beast";
-        }else if (race.equals("tree")) {
-            this.race = "tree folk";
-        }else if (race.equals("people")) {
-            this.race = "liquid people";
-        }else if (race.equals("virus")) {
-            this.race = "cyber virus";
-        }else if (race.equals("gel")) {
-            this.race = "gel fish";
-        }else{
-            //Doesn't match exact or any shorthands, so invalid
-            valid = false;
         }
-        return valid;
+        return true;
     }
 
     /**
@@ -172,30 +160,193 @@ public class DMCreature extends DMCard{
      * @param cost An int representing the amount of mana required to play the card. Must be >= 0.
      * @param hasSheildTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
      * @param power An int for the base power of the creature card. Must be >=0; doesn't count in-game modifiers
-     * @param race A string for the race of the card. Valid values are found in the VALID_RACES array,
-     * and some shorthands are accepted. Capitalization doesn't matter.
+     * @param race an int representing the Race of the creature. Use RACE_... constants.
      * @param isEvolution True if the creature is an evolution creature; false if it is not.
      * @return True if all parameters were valid and have been set properly, false if one or more parameters were not set properly.
      * @throws IllegalArgumentException if the race argument was invalid, will throw this exception with a message
      * that includes some of the more likely mistakes that have been made.
      */
     public boolean setAll(String name, String[] aliases, int civilization, int cardType, String textbox,
-                          int rarity, int cost, boolean hasSheildTrigger,int power, String race, boolean isEvolution) throws IllegalArgumentException{
+                          int rarity, int cost, boolean hasSheildTrigger,int power, int race, boolean isEvolution) throws IllegalArgumentException{
         this.setIsEvolution(isEvolution);
         boolean raceValid = this.setRace(race);
         if(!raceValid){
-            String message = "Race string invalid.\n";
-            message += "The valid races are:\n";
-            for (String cardRace : VALID_RACES) {
-                message += cardRace + ", ";
-            }
-            message = message.substring(0, message.length() - 2);
-            message += "\nYour inputted race: " + civilization;
+            String message = "Race invalid.\n";
+            message += "Please use DMCreature.RACE_... constants to set race.";
             throw new IllegalArgumentException(message);
         }
         boolean cardSuccess = super.setAll(name,aliases,civilization,cardType,textbox,rarity,cost,hasSheildTrigger);
         return cardSuccess && this.setPower(power); //&& raceValid, but that will always be true at this point
     }
+
+    //ACCESSORS
+
+    /**
+     * Getter for the Race instance variable of the creature
+     * @return an int representing the race of the creature, corresponding to a  RACE_... constant.
+     */
+    public int getRace(){
+        return race;
+    }
+
+    /**
+     * Getter for Power instance variable of  the creature.
+     * @return an int representing the creature's power.
+     */
+    public int getPower(){
+        return power;
+    }
+
+    /**
+     * Getter for isEvolution instance variable
+     * @return True if the creature is an evolution creature; False if it is not.
+     */
+    public boolean getIsEvolution(){
+        return isEvolution;
+    }
+
+
+    /**
+     * Conversion from RACE_... constants to Strings
+     * @param raceInt the integer corresponding to the RACE_... constant to be converted.
+     * @return A string for the name of the specified Race.
+     */
+    public String raceToString(int raceInt){
+        String result;
+        switch (raceInt){
+            case RACE_GHOST:
+                result = "Ghost";
+                break;
+            case RACE_BRAIN_JACKER:
+                result = "Brain Jacker";
+                break;
+            case RACE_LIVING_DEAD:
+                result = "Living Dead";
+                break;
+            case RACE_DEMON_COMMAND:
+                result = "Demon Command";
+                break;
+            case RACE_CHIMERA:
+                result = "Chimera";
+                break;
+            case RACE_PARASITE_WORM:
+                result = "Parasite Worm";
+                break;
+            case RACE_HEDRIAN:
+                result = "Hedrian";
+                break;
+            case RACE_DARK_LORD:
+                result = "Dark Lord";
+                break;
+            case RACE_ARMORED_DRAGON:
+                result = "Armored Dragon";
+                break;
+            case RACE_HUMAN:
+                result = "Human";
+                break;
+            case RACE_DRAGONOID:
+                result = "Dragonoid";
+                break;
+            case RACE_ROCK_BEAST:
+                result = "Rock Beast";
+                break;
+            case RACE_ARMORED_WYVERN:
+                result = "Armored Wyvern";
+                break;
+            case RACE_MACHINE_EATER:
+                result = "Machine Eather";
+                break;
+            case RACE_ARMORLOID:
+                result = "Armorloid";
+                break;
+            case RACE_ANGEL_COMMAND:
+                result = "Angel Command";
+                break;
+            case RACE_LIGHT_BRINGER:
+                result = "Light Bringer";
+                break;
+            case RACE_GUARDIAN:
+                result = "Guardian";
+                break;
+            case RACE_STARLIGHT_TREE:
+                result = "Starlight Tree";
+                break;
+            case RACE_INITIATE:
+                result = "Initiate";
+                break;
+            case RACE_BERSERKER:
+                result = "Berserker";
+                break;
+            case RACE_MECHA_THUNDER:
+                result = "Mecha Thunder";
+                break;
+            case RACE_BEAST_FOLK:
+                result = "Beast Folk";
+                break;
+            case RACE_GIANT:
+                result = "Giant";
+                break;
+            case RACE_GIANT_INSECT:
+                result = "Gaint Insect";
+                break;
+            case RACE_TREE_FOLK:
+                result = "Tree Folk";
+                break;
+            case RACE_HORNED_BEAST:
+                result = "Horned Beast";
+                break;
+            case RACE_LIQUID_PEOPLE:
+                result = "Liquid People";
+                break;
+            case RACE_CYBER_VIRUS:
+                result= "Cyber Virus";
+                break;
+            case RACE_CYBER_LORD:
+                result = "Cyber Lord";
+                break;
+            case RACE_LEVIATHAN:
+                result="Leviathan";
+                break;
+            case RACE_GEL_FISH:
+                result = "Gel Fish";
+                break;
+            case RACE_FISH:
+                result = "Fish";
+                break;
+
+            default:
+                result = "INVALID_RACE";
+        }
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object other){
+        if ((other == null) || (! (other instanceof DMCreature))){
+            return false;
+        } else{
+            DMCreature otherCard = (DMCreature) other;
+            return super.equals(otherCard)
+                    && (this.power == otherCard.power)
+                    && (this.race == otherCard.race)
+                    && (this.isEvolution == otherCard.isEvolution);
+        }
+    }
+
+    @Override
+    public String toString(){
+        String superString = super.toString();
+        String evoString;
+        if(isEvolution){
+            evoString = "An Evolution creature.";
+        }else {
+            evoString = "Not an Evolution creature.";
+        }
+        String result = String.format("%s%nRace:%s%nPower: %d%n%s",superString,raceToString(race),power,evoString);
+
+        return result;
+    }
+
 
 
 }

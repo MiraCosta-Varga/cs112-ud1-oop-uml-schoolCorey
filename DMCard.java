@@ -21,6 +21,7 @@ public class DMCard {
     public static final int CIVILIZATION_LIGHT = 2;
     public static final int CIVILIZATION_NATURE = 3;
     public static final int CIVILIZATION_WATER = 4;
+    public static final int LAST_CIVILIZATION = CIVILIZATION_WATER;
 
     public static final String[] CIVILIZATIONS = { "Darkness", "Fire", "Light", "Nature", "Water" };
 
@@ -148,7 +149,7 @@ public class DMCard {
      * @return true if civilization param was a valid value and the string was set, False if it was not valid and thus not set.
      */
     public boolean setCivilization(int civilization) {
-        if ((civilization>CIVILIZATION_WATER)||(civilization<0)){
+        if ((civilization>LAST_CIVILIZATION)||(civilization<0)){
             return false;
         }else{
             this.civilization = civilization;
@@ -336,8 +337,10 @@ public class DMCard {
         switch (cardType){
             case CARDTYPE_CREATURE:
                 typeString = "creature";
+                break;
             case CARDTYPE_SPELL:
                 typeString = "spell";
+                break;
             default:
                 typeString = "INVALID_TYPE";
         }
@@ -345,14 +348,19 @@ public class DMCard {
         switch (civilization){
             case CIVILIZATION_DARKNESS:
                 civString = "Darkness";
+                break;
             case CIVILIZATION_FIRE:
                 civString = "Fire";
+                break;
             case CIVILIZATION_LIGHT:
                 civString = "Light";
+                break;
             case CIVILIZATION_NATURE:
                 civString = "Nature";
+                break;
             case CIVILIZATION_WATER:
                 civString = "Water";
+                break;
             default:
                 civString = "UNKOWN_CIVILIZATION";
         }
