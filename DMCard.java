@@ -315,7 +315,10 @@ public class DMCard {
     /***** OTHER REQUIRED METHODS *****/
 
     @Override
-    public String toString() {
+    public String toString(){
+        return this.getName();
+    }
+    public String toStringExpanded() {
         String typeString;
         switch (cardType){
             case CARDTYPE_CREATURE:

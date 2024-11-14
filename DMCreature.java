@@ -332,8 +332,8 @@ public class DMCreature extends DMCard{
     }
 
     @Override
-    public String toString(){
-        String superString = super.toString();
+    public String toStringExpanded(){
+        String superString = super.toStringExpanded();
         String evoString;
         if(isEvolution){
             evoString = "An Evolution creature.";
