@@ -60,15 +60,13 @@ public class DMCreature extends DMCard{
      * the game's initial search ordering.
      */
     public DMCreature() {
-        this(DEFAULT_NAME, DEFAULT_ALIASES, DEFAULT_CIVILIZATION, DEFAULT_CARD_TYPE, DEFAULT_TEXTBOX, DEFAULT_RARITY,
-                DEFAULT_COST, DEFAULT_HAS_SHIELD_TRIGGER,DEFAULT_POWER,DEFAULT_RACE,DEFAULT_IS_EVOLUTION);
+        this(DEFAULT_NAME, DEFAULT_CIVILIZATION, DEFAULT_CARD_TYPE, DEFAULT_TEXTBOX, DEFAULT_RARITY,
+                DEFAULT_COST, DEFAULT_HAS_SHIELD_TRIGGER,DEFAULT_POWER,DEFAULT_RACE,DEFAULT_IS_EVOLUTION, DEFAULT_IDNUM);
     }
 
     /**
      * Full Constructor for the DMCreature class, representing a creature-type Duel Masters card from the PS2 video game.
      * @param name A String for the full name of the Duel Masters card in the card viewer, NOT the shortened version occasionally used in-game
-     * @param aliases A String array containing names that the card is commonly referred as. Needs a length > 0.
-     *      The first entry in the array should be the same as the card's Name value, but is not checked at this point.
      * @param civilization An int representing the Duel Masters civilization (color) of the card. Use CIVILIZATION_... constants
      * @param cardType an int using the CARDTYPE_... constants for Creature or Spell
      * @param textbox A String for the text of the ability for the card. Includes static ablilities such as Sheild Trigger/Power
@@ -81,12 +79,13 @@ public class DMCreature extends DMCard{
      * @param power An int for the base power of the creature card. Must be >=0; doesn't count in-game modifiers
      * @param race An int represending the race of the card. Use RACE_... constants.
      * @param isEvolution True if the creature is an evolution creature; false if it is not.
+     * @param idNum a number for the id linked to the card. Used to reference card-specific resources, etc.
      * @throws IllegalArgumentException if any argument was invalid as seen in the param sections, will throw this exception with a messeage
      *      that includes some of the more likely mistakes that have been made.
      */
-    public DMCreature(String name, String[] aliases, int civilization, int cardType, String textbox,
-                  int rarity, int cost, boolean hasSheildTrigger, int power, int race, boolean isEvolution) throws IllegalArgumentException {
-        if (!this.setAll(name, aliases, civilization, cardType, textbox, rarity, cost, hasSheildTrigger, power,race,isEvolution)) {
+    public DMCreature(String name, int civilization, int cardType, String textbox,
+                  int rarity, int cost, boolean hasSheildTrigger, int power, int race, boolean isEvolution,int idNum) throws IllegalArgumentException {
+        if (!this.setAll(name, civilization, cardType, textbox, rarity, cost, hasSheildTrigger, power,race,isEvolution,idNum)) {
             String message = "One or more fields were invalid. Most likely, you had an invalid civilization.\n";
             message += "The valid civilizations are:\n";
             for (String civ : CIVILIZATIONS) {
@@ -147,8 +146,6 @@ public class DMCreature extends DMCard{
      * Sets all instance varialbes for the Duel Masters creature card: name, aliases, civilization, cardType, textbox, rarity, cost,
      * hasSheildTrigger, power, race, and isEvolution.
      * @param name A String for the full name of the Duel Masters card in the card viewer, NOT the shortened version occasionally used in-game
-     * @param aliases A String array containing names that the card is commonly referred as. Needs a length > 0.
-     *      The first entry in the array should be the same as the card's Name value, but is not checked at this point.
      * @param civilization A string representing the Duel Masters civilization (color) of the card. Capitalization doesn't matter.
      *      Valid Strings are Fire, Red, Water, Blue, Nature, Green, Darkness, Black, Light, Yellow, and White.
      * @param cardType an int using the CARDTYPE_... constants for Creature or Spell
@@ -162,12 +159,13 @@ public class DMCreature extends DMCard{
      * @param power An int for the base power of the creature card. Must be >=0; doesn't count in-game modifiers
      * @param race an int representing the Race of the creature. Use RACE_... constants.
      * @param isEvolution True if the creature is an evolution creature; false if it is not.
+     * @param idNum a number for the id linked to the card. Used to reference card-specific resources, etc.
      * @return True if all parameters were valid and have been set properly, false if one or more parameters were not set properly.
      * @throws IllegalArgumentException if the race argument was invalid, will throw this exception with a message
      * that includes some of the more likely mistakes that have been made.
      */
-    public boolean setAll(String name, String[] aliases, int civilization, int cardType, String textbox,
-                          int rarity, int cost, boolean hasSheildTrigger,int power, int race, boolean isEvolution) throws IllegalArgumentException{
+    public boolean setAll(String name, int civilization, int cardType, String textbox,
+                          int rarity, int cost, boolean hasSheildTrigger,int power, int race, boolean isEvolution, int idNum) throws IllegalArgumentException{
         this.setIsEvolution(isEvolution);
         boolean raceValid = this.setRace(race);
         if(!raceValid){
@@ -175,7 +173,7 @@ public class DMCreature extends DMCard{
             message += "Please use DMCreature.RACE_... constants to set race.";
             throw new IllegalArgumentException(message);
         }
-        boolean cardSuccess = super.setAll(name,aliases,civilization,cardType,textbox,rarity,cost,hasSheildTrigger);
+        boolean cardSuccess = super.setAll(name,civilization,cardType,textbox,rarity,cost,hasSheildTrigger,idNum);
         return cardSuccess && this.setPower(power); //&& raceValid, but that will always be true at this point
     }
 

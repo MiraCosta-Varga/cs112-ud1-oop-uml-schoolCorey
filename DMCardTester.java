@@ -56,7 +56,6 @@ public class DMCardTester {
         testToString();
         testSetName();
         testSetCivilization();
-        testSetAliases();
         testSetCardType();
         testSetTextbox();
         testSetRarirty();
@@ -68,7 +67,6 @@ public class DMCardTester {
         testFullConstructor();
         testCopyConstructor();
         testGetName();
-        testGetAliases();
         testGetCivilization();
         testGetCardType();
         testGetTextbox();
@@ -94,8 +92,6 @@ public class DMCardTester {
         
         System.out.println(
                 "Otherwise, the above should show the default information for Belbetphlo, Wailing Shadow: A Darkness Creature with Slayer, Common, 3-cost, no sheild trigger.");
-        System.out.println("If default constructor is implemented, aliases should be \"Belbetphlo, Wailing Shadow\" and \"Belbetphlo\" ");
-        System.out.println(test.aliasesString());
     }
 
     public static void testSetName() {
@@ -147,38 +143,6 @@ public class DMCardTester {
         System.out.println("Should have changed civilization field to Fire, to now say \"A Darkness ...\"");
         System.out.println(test);
         System.out.println("Setter returned: " + setterTest + "\n");
-
-    }
-    
-    public static void testSetAliases() {
-        DMCard test = new DMCard();
-        boolean setterTest;
-        String[] aliases = new String[2];
-        System.out.println("\n==============================================");
-        System.out.println("TESTING setAliases() METHOD:\n");
-        aliases[0] = "Gattling Skyterror";
-        aliases[1] = "Skyterror";
-
-        setterTest = test.setAliases(aliases); //
-        System.out.println("Aliases should have changed. Should output \"Gattling Skyterror\" and \"Skyterror\"");
-        System.out.println(test.aliasesString());
-        System.out.println("Setter returned: " + setterTest);
-        aliases[0] = "Xeno Mantis";
-        aliases[1] = "X Mantis"; // deep copy test
-        System.out.println(
-                "Deep copy test.\nAliases should not have changed. Should output \"Gattling Skyterror\" and \"Skyterror\"");
-        System.out.println(test.aliasesString());
-
-        setterTest = test.setAliases(aliases);
-        System.out.println("Aliases should have changed. Should output \"Xeno Mantis\" and \"X Mantis\"");
-        System.out.println(test.aliasesString());
-        System.out.println("Setter returned: " + setterTest);
-
-        aliases = new String[0];
-        setterTest = test.setAliases(aliases); // invalid empty array test
-        System.out.println("Aliases should not have changed. Should still output \"Xeno Mantis\" and \"X Mantis\"");
-        System.out.println(test.aliasesString());
-        System.out.println("Setter returned: " + setterTest);
 
     }
 
@@ -304,41 +268,33 @@ public class DMCardTester {
 
         aliases[0] = "Xeno Mantis";
         aliases[1] = "X Mantis";
-        setterTest = test.setAll("Xeno Mantis", aliases, DMCard.CIVILIZATION_NATURE, DMCard.CARDTYPE_CREATURE, "Double Breaker", DMCard.RARITY_NONE, 0,
-                false);
+        setterTest = test.setAll("Xeno Mantis", DMCard.CIVILIZATION_NATURE, DMCard.CARDTYPE_CREATURE, "Double Breaker", DMCard.RARITY_NONE, 0,
+                false,0);
         System.out.println(
                 "setAll should have changed Name to Xeno Mantis, civ to Nature, card type to creature, ability to Double Breaker, rarity to NONE, cost to 0, and it should not have sheild trigger");
         System.out.println(test);
-
-        System.out.println("Aliases should be \"Xeno Mantis\" and \"X Mantis\"");
-        System.out.println(test.aliasesString());
         System.out.println("And setter should have returned true.");
         System.out.println("Setter returned: " + setterTest);
         System.out.println();
 
         aliases[0] = "Gattling Skyterror";
         aliases[1] = "Skyterror";
-        setterTest = test.setAll("Gattling Skyterror", aliases, DMCard.CIVILIZATION_FIRE, DMCard.CARDTYPE_CREATURE, "Power Attacker +4000",
+        setterTest = test.setAll("Gattling Skyterror",  DMCard.CIVILIZATION_FIRE, DMCard.CARDTYPE_CREATURE, "Power Attacker +4000",
                 DMCard.RARITY_SUPER_RARE, 6,
-                true);
+                true,1);
         System.out.println(
                 "setAll should have changed Name to Gattling Skyterrer, civ to Fire, card type to creature, ability to Power Attacker +4000, rarity to Super Rare, cost to 6, and it should have sheild trigger");
         System.out.println(test);
-        System.out.println("Aliases should be \"Gattling Skyterror\" and \"Skyterror\"");
-        System.out.println(test.aliasesString());
         System.out.println("And setter should have returned true.");
         System.out.println("Setter returned: " + setterTest);
         System.out.println();
 
         aliases = new String[0];
-        setterTest = test.setAll("Solar Ray", aliases, 90, DMCard.CARDTYPE_SPELL, "Tap All Creatures", -5, -10,
-                false);
+        setterTest = test.setAll("Solar Ray",  90, DMCard.CARDTYPE_SPELL, "Tap All Creatures", -5, -10,
+                false,0);
         System.out.println(
                 "Should only have changed Name, Ability, and sheild trigger.");
         System.out.println(test);
-
-        System.out.println("Aliases should still be \"Gattling Skyterror\" and \"Skyterror\"");
-        System.out.println(test.aliasesString());
         System.out.println("And setter should have returned false.");
         System.out.println("Setter returned: " + setterTest);
         System.out.println();
@@ -355,8 +311,8 @@ public class DMCardTester {
                 "Creating Gattling Skyterror. Should print info for Gattling Skyterror, a fire creature with double breaker and Power Attacker +4000. Rarity should be very rare, cost 6, no sheild trigger");
         String[] aliases = { "Gattling Skyterror", "Skyterror" };
         try {
-            test = new DMCard("Gattling Skyterror", aliases, DMCard.CIVILIZATION_FIRE, DMCard.CARDTYPE_CREATURE, "Double Breaker\nPower Attacker +4000",
-                    DMCard.RARITY_VERY_RARE, 6, false);
+            test = new DMCard("Gattling Skyterror", DMCard.CIVILIZATION_FIRE, DMCard.CARDTYPE_CREATURE, "Double Breaker\nPower Attacker +4000",
+                    DMCard.RARITY_VERY_RARE, 6, false,139);
             System.out.println(test);
         } catch (IllegalArgumentException iae) {
             System.out.println(iae.getMessage());
@@ -369,8 +325,8 @@ public class DMCardTester {
         System.out.println(
                 "Creating Solar Ray. Should print info for Solar Ray, a yellow spell that taps all creatures. Rarity should be NONE, cost 1, has sheild trigger.");
         try {
-            test = new DMCard("Solar Ray", aliases, DMCard.CIVILIZATION_LIGHT, DMCard.CARDTYPE_SPELL, "Tap all creatures", DMCard.RARITY_NONE, 1,
-                    true);
+            test = new DMCard("Solar Ray",  DMCard.CIVILIZATION_LIGHT, DMCard.CARDTYPE_SPELL, "Tap all creatures", DMCard.RARITY_NONE, 1,
+                    true,3);
             System.out.println(test);
         } catch (IllegalArgumentException iae) {
             System.out.println(iae.getMessage());
@@ -378,28 +334,24 @@ public class DMCardTester {
         }
 
         System.out.println("Trying to create a card of Purple Civilization");
-        constructorFailTests("Solar Ray", aliases, -1, DMCard.CARDTYPE_SPELL, "Untap all creatures", DMCard.RARITY_UNCOMMON, 4,
-                true);
+        constructorFailTests("Solar Ray", -1, DMCard.CARDTYPE_SPELL, "Untap all creatures", DMCard.RARITY_UNCOMMON, 4,
+                true,9);
         System.out.println("Trying to create a card of out of bounds card type");
-        constructorFailTests("Solar Ray", aliases, DMCard.CIVILIZATION_LIGHT, 3, "Untap all creatures", DMCard.RARITY_UNCOMMON, 4,
-                true);
+        constructorFailTests("Solar Ray", DMCard.CIVILIZATION_LIGHT, 3, "Untap all creatures", DMCard.RARITY_UNCOMMON, 4,
+                true,9);
         System.out.println("Trying to create a card of invalid rarity");
-        constructorFailTests("Solar Ray", aliases, DMCard.CIVILIZATION_LIGHT, DMCard.CARDTYPE_SPELL, "Untap all creatures", 99, 4, true);
+        constructorFailTests("Solar Ray",  DMCard.CIVILIZATION_LIGHT, DMCard.CARDTYPE_SPELL, "Untap all creatures", 99, 4, true,9);
         System.out.println("Trying to create a card of negative cost");
-        constructorFailTests("Solar Ray", aliases, DMCard.CIVILIZATION_LIGHT, DMCard.CARDTYPE_SPELL, "Untap all creatures", DMCard.RARITY_UNCOMMON, -4,
-                true);
-        aliases = new String[0];
-        System.out.println("Trying to create a card with no aliases");
-        constructorFailTests("Solar Ray", aliases, DMCard.CIVILIZATION_LIGHT, DMCard.CARDTYPE_SPELL, "Untap all creatures", DMCard.RARITY_UNCOMMON, 4, true);
-
+        constructorFailTests("Solar Ray",  DMCard.CIVILIZATION_LIGHT, DMCard.CARDTYPE_SPELL, "Untap all creatures", DMCard.RARITY_UNCOMMON, -4,
+                true,9);
 
     }
     
-    public static void constructorFailTests(String name, String[] aliases, int civilization, int cardType, String textbox,
-            int rarity, int cost, boolean hasSheildTrigger) {
+    public static void constructorFailTests(String name, int civilization, int cardType, String textbox,
+            int rarity, int cost, boolean hasSheildTrigger, int idNum) {
         DMCard test;
         try {
-            test = new DMCard(name, aliases, civilization, cardType, textbox, rarity, cost, hasSheildTrigger);
+            test = new DMCard(name, civilization, cardType, textbox, rarity, cost, hasSheildTrigger, idNum);
             System.out.println("The card was created? That shouldn't happen");
         } catch (IllegalArgumentException iae) {
             System.out.println(iae.getMessage());
@@ -408,9 +360,8 @@ public class DMCardTester {
     }
 
     public static void testCopyConstructor() {
-        String[] aliases = { "Gattling Skyterror", "Skyterror" };
-        DMCard test = new DMCard("Gattling Skyterror", aliases, DMCard.CIVILIZATION_FIRE, DMCard.CARDTYPE_CREATURE, "Double Breaker\nPower Attacker +4000",
-                DMCard.RARITY_VERY_RARE, 6, false);
+        DMCard test = new DMCard("Gattling Skyterror", DMCard.CIVILIZATION_FIRE, DMCard.CARDTYPE_CREATURE, "Double Breaker\nPower Attacker +4000",
+                DMCard.RARITY_VERY_RARE, 6, false,19);
         System.out.println("\n==============================================");
         System.out.println("TESTING copy constructor METHOD:\n");
 
@@ -420,8 +371,7 @@ public class DMCardTester {
         try{
             DMCard copy = new DMCard(test);
             System.out.println(copy);
-            String[] shallow = {"Solary Ray", "Ray"};
-            test.setAll("Solar Ray", shallow, DMCard.CIVILIZATION_LIGHT, DMCard.CARDTYPE_SPELL, "Tap All creatures", DMCard.RARITY_UNCOMMON, 1, true);
+            test.setAll("Solar Ray", DMCard.CIVILIZATION_LIGHT, DMCard.CARDTYPE_SPELL, "Tap All creatures", DMCard.RARITY_UNCOMMON, 1, true,9);
             System.out.println("Changed the original. Did the copy change?");
             System.out.println(copy);
 
@@ -454,18 +404,6 @@ public class DMCardTester {
         System.out.println("Changed name, should now be Gattling Skyterror: " + test.getName());
     }
 
-    public static void testGetAliases() {
-        DMCard test = new DMCard();
-        System.out.println("\n==============================================");
-        System.out.println("TESTING getAliases() METHOD:\n");
-
-        System.out.println("Should have the default aliases of Belbetphlo, Wailing Shadow; Belbetphlo:");
-        System.out.println(aliasesString(test.getAliases()));
-        String[] aliases = { "Solar Ray", "Sol" };
-        test.setAliases(aliases);
-        System.out.println("Should change to Solar Ray; Sol:");
-        System.out.println(aliasesString(test.getAliases()));
-    }
 
     public static String aliasesString(String[] aliases) {
         String allAliases = "";
@@ -548,8 +486,8 @@ public class DMCardTester {
 
     public static void testEquals() {
         String[] aliases = { "Gattling Skyterror", "Skyterror" };
-        DMCard test1 = new DMCard("Gattling Skyterror", aliases, DMCard.CIVILIZATION_FIRE, DMCard.CARDTYPE_CREATURE, "Double Breaker\nPower Attacker +4000",
-                    DMCard.RARITY_VERY_RARE, 6, false);
+        DMCard test1 = new DMCard("Gattling Skyterror", DMCard.CIVILIZATION_FIRE, DMCard.CARDTYPE_CREATURE, "Double Breaker\nPower Attacker +4000",
+                    DMCard.RARITY_VERY_RARE, 6, false,9);
         System.out.println("\n==============================================");
         System.out.println("TESTING equals() METHOD:\n");
         DMCard test2 = new DMCard(test1);
@@ -558,10 +496,6 @@ public class DMCardTester {
         test2.setName("Solar Ray");
         System.out.println("Testing equals on two objects with different names. Should be false: " + test1.equals(test2));
         test2 = new DMCard(test1);
-        String[] changedAlias = {"Gattling Skyterror"};
-        test2.setAliases(changedAlias);
-        System.out.println("Testing equals on two objects with different numbers of aliases. Should be false: "
-                + test1.equals(test2));
         test2 = new DMCard(test1);
         test2.setCivilization(DMCard.CIVILIZATION_NATURE);
         System.out.println(
@@ -585,7 +519,7 @@ public class DMCardTester {
         test2.setHasShieldTrigger(true);
         System.out.println(
                 "Testing equals on two objects with different civilizations. Should be false: " + test1.equals(test2));
-        test2 = new DMCard("Solar Ray", changedAlias, DMCard.CIVILIZATION_NATURE, DMCard.CARDTYPE_CREATURE, "Add 1 card to your sheilds", DMCard.RARITY_COMMON, 0, true);
+        test2 = new DMCard("Solar Ray", DMCard.CIVILIZATION_NATURE, DMCard.CARDTYPE_CREATURE, "Add 1 card to your sheilds", DMCard.RARITY_COMMON, 0, true,9);
         System.out.println("Testing equals on two objects with all fields different. Should be false: " + test1.equals(test2));
 
     }

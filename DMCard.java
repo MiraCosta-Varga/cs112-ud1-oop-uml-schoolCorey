@@ -27,25 +27,24 @@ public class DMCard {
 
     // Default constats, defaults to the information for Belbetphlo, Wailing Shadow; the first card in the game's initial search ordering.
     public static final String DEFAULT_NAME = "Belbetphlo, Wailing Shadow";
-    public static final String[] DEFAULT_ALIASES = { "Belpetphlo, Wailing Shadow", "Belbetphlo" };
     public static final int DEFAULT_CIVILIZATION = CIVILIZATION_DARKNESS;
     public static final int DEFAULT_CARD_TYPE = CARDTYPE_CREATURE;
     public static final String DEFAULT_TEXTBOX = "Slayer";
     public static final int DEFAULT_RARITY = RARITY_COMMON;
     public static final int DEFAULT_COST = 3;
     public static final boolean DEFAULT_HAS_SHIELD_TRIGGER = false; //SHEILD SHIELD
+    public static final int DEFAULT_IDNUM = 0;
 
     /*Instance Variables */
 
     private String name;
-    private String[] aliases = new String[2]; //Array for all possible names to search by. Usually contatins the full name of the card
-                                              // and a shortened version, such as the first word in the card or the name seen during gameplay.
     private int civilization;
     private int cardType;
     private String textbox;
     private int rarity;
     private int cost;
     private boolean hasShieldTrigger;
+    int idNum;
 
     /**** CONSTRUCTORS ****/
 
@@ -54,14 +53,13 @@ public class DMCard {
      * the game's initial search ordering.
      */
     public DMCard() {
-        this(DEFAULT_NAME, DEFAULT_ALIASES, DEFAULT_CIVILIZATION, DEFAULT_CARD_TYPE, DEFAULT_TEXTBOX, DEFAULT_RARITY,
-                DEFAULT_COST, DEFAULT_HAS_SHIELD_TRIGGER);
+        this(DEFAULT_NAME, DEFAULT_CIVILIZATION, DEFAULT_CARD_TYPE, DEFAULT_TEXTBOX, DEFAULT_RARITY,
+                DEFAULT_COST, DEFAULT_HAS_SHIELD_TRIGGER, DEFAULT_IDNUM);
     }
 
     /**
      * Full Constructor for the DMCard class, representing a Duel Masters card from the PS2 video game.
      * @param name A String for the full name of the Duel Masters card in the card viewer, NOT the shortened version occasionally used in-game
-     * @param aliases A String array containing names that the card is commonly referred as. Needs a length > 0.
      *      The first entry in the array should be the same as the card's Name value, but is not checked at this point.
      * @param civilization An int representing the Duel Masters civilization (color) of the card. Use CIVILIZATION_... constants
      * @param cardType an int using the CARDTYPE_... constants for Creature or Spell
@@ -72,12 +70,13 @@ public class DMCard {
      *      Super Rare (4), and NONE (-1).
      * @param cost An int representing the amount of mana required to play the card. Must be >= 0.
      * @param hasShieldTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
+     * @param idNum a number for the id linked to the card. Used to reference card-specific resources, etc.
      * @throws IllegalArgumentException if any argument was invalid as seen in the param sections, will throw this exception with a messeage
      *      that includes some of the more likely mistakes that have been made.
      */
-    public DMCard(String name, String[] aliases, int civilization, int cardType, String textbox,
-            int rarity, int cost, boolean hasShieldTrigger) throws IllegalArgumentException {
-        if (!this.setAll(name, aliases, civilization, cardType, textbox, rarity, cost, hasShieldTrigger)) {
+    public DMCard(String name,  int civilization, int cardType, String textbox,
+            int rarity, int cost, boolean hasShieldTrigger, int idNum) throws IllegalArgumentException {
+        if (!this.setAll(name, civilization, cardType, textbox, rarity, cost, hasShieldTrigger, idNum)) {
             String message = "One or more fields were invalid. Most likely, you had an invalid civilization.\n";
             message += "The valid civilizations are:\n";
             for (String civ : CIVILIZATIONS) {
@@ -90,7 +89,6 @@ public class DMCard {
             throw new IllegalArgumentException(message);
         }
 
-        // May later implement a check here to see if the first entry in Aliases matches the instance variable for name.
     }
 
     /**
@@ -102,8 +100,8 @@ public class DMCard {
         if (original == null) {
             throw new IllegalArgumentException("ERROR: Null arugment passed to DMCard copy constructor");
         }
-        this.setAll(original.name, original.aliases, original.civilization, original.cardType, original.textbox,
-                original.rarity, original.cost, original.hasShieldTrigger);
+        this.setAll(original.name, original.civilization, original.cardType, original.textbox,
+                original.rarity, original.cost, original.hasShieldTrigger, original.idNum);
     }
 
     
@@ -118,29 +116,6 @@ public class DMCard {
     public void setName(String name) {
         this.name = name;
     }
-
-    /**
-     * Setter for the aliases instance variable, which is an array of Strings for possible names of the card.
-     * Includes the full name, any shortened versions used in-game, and any commonly-used shorthand names for the card.
-     * @param aliases A String array containing names that the card is commonly referred as. Needs a length > 0.
-     *      The first entry in the array should be the same as the card's Name value, but is not checked at this point.
-     * @return true if the parameter is valid and the variable was properly set, false otherwise.
-     */
-    public boolean setAliases(String[] aliases) {
-        boolean valid = true;
-        if (aliases.length <= 0) {
-            valid = false;
-        } else {
-            String[] newAliases = new String[aliases.length];
-            for (int i = 0; i < aliases.length; i++) {
-                newAliases[i] = aliases[i];
-            }
-            this.aliases = newAliases;
-        }
-
-        return valid;
-    }
-
     
     /**
      * Setter for the civilization instance variable. Sets the card to be one of the five Duel Masters civilizations:
@@ -233,13 +208,25 @@ public class DMCard {
     public void setHasShieldTrigger(boolean hasShieldTrigger) {
         this.hasShieldTrigger = hasShieldTrigger;
     }
+
+    /**
+     * Setter for idNum variable of DMCard.
+     * @param idNum a number for the id linked to the card. Used to reference card-specific resources, etc. Must be >-1
+     * @return true if idNum was valid and thus properly set, false if invalid and therefore not set.
+     */
+    public boolean setIdNum(int idNum){
+        if(idNum>-1){
+            this.idNum = idNum;
+            return true;
+        }else {
+            return false;
+        }
+    }
     
     /**
-     * Sets all instance varialbes for the Duel Masters card: name, aliases, civilization, cardType, textbox, rarity, cost,
-     * and hasSheildTrigger.
+     * Sets all instance varialbes for the Duel Masters card: name,  civilization, cardType, textbox, rarity, cost,
+     * hasSheildTrigger, and idNum.
      * @param name A String for the full name of the Duel Masters card in the card viewer, NOT the shortened version occasionally used in-game
-     * @param aliases A String array containing names that the card is commonly referred as. Needs a length > 0.
-     *      The first entry in the array should be the same as the card's Name value, but is not checked at this point.
      * @param civilization A string representing the Duel Masters civilization (color) of the card. Capitalization doesn't matter.
      *      Valid Strings are Fire, Red, Water, Blue, Nature, Green, Darkness, Black, Light, Yellow, and White.
      * @param cardType an int using the CARDTYPE_... constants for Creature or Spell
@@ -250,15 +237,16 @@ public class DMCard {
      *      Super Rare (4), and NONE (-1).
      * @param cost An int representing the amount of mana required to play the card. Must be >= 0.
      * @param hasSheildTrigger a boolean which is true if the card has the "Sheild Trigger" ability and false if it does not.
+     * @param idNum a number for the id linked to the card. Used to reference card-specific resources, etc.
      * @return True if all parameters were valid and have been set properly, false if one or more parameters were not set properly.
      */
-    public boolean setAll(String name, String[] aliases, int civilization, int cardType, String textbox,
-            int rarity, int cost, boolean hasSheildTrigger) {
+    public boolean setAll(String name, int civilization, int cardType, String textbox,
+            int rarity, int cost, boolean hasSheildTrigger, int idNum) {
         this.setName(name);
         this.setTextbox(textbox);
         this.setHasShieldTrigger(hasSheildTrigger);
-        return this.setAliases(aliases) && this.setCivilization(civilization) && this.setCardType(cardType) && this.setRarity(rarity)
-                && this.setCost(cost);
+        return this.setCivilization(civilization) && this.setCardType(cardType) && this.setRarity(rarity)
+                && this.setCost(cost) && this.setIdNum(idNum);
     }
 
     /****ACCESSORS *****/
@@ -271,13 +259,6 @@ public class DMCard {
         return this.name;
     }
 
-    /**
-     * Getter for aliases instance variable
-     * @return An array of Strings for each name the card is commonly reffered to by.
-     */
-    public String[] getAliases() {
-        return this.aliases;
-    }
 
     /**
      * Getter for civilization instance variable
@@ -327,6 +308,8 @@ public class DMCard {
     public boolean getHasShieldTrigger() {
         return hasShieldTrigger;
     }
+
+    public int getIdNum(){return this.idNum;}
 
 
     /***** OTHER REQUIRED METHODS *****/
@@ -399,7 +382,8 @@ public class DMCard {
         } else {
             printString += "Doesn't have ";
         }
-        printString += "sheild trigger.";
+        printString += "sheild trigger.\n";
+        printString += String.format("Id Number: %d",idNum);
 
         return printString;
     }
@@ -411,28 +395,12 @@ public class DMCard {
             return false;
         } else{
             DMCard otherCard = (DMCard) other;
-            return this.name.equals(otherCard.name) && Arrays.equals(this.aliases, otherCard.aliases)
-                    && (this.civilization==otherCard.civilization) && (this.cardType==otherCard.cardType)
-                    && this.textbox.equals(otherCard.textbox) && this.rarity == otherCard.rarity
-                    && this.cost == otherCard.cost && this.hasShieldTrigger == otherCard.hasShieldTrigger;
+            return this.name.equals(otherCard.name) && (this.civilization==otherCard.civilization)
+                    && (this.cardType==otherCard.cardType) && this.textbox.equals(otherCard.textbox)
+                    && this.rarity == otherCard.rarity && this.cost == otherCard.cost
+                    && this.hasShieldTrigger == otherCard.hasShieldTrigger && this.idNum == otherCard.idNum;
         }
         
-    }
-    
-    /**
-     * Only used for testing. Prints all aliases of the card in a human-readable format.
-     * @return A String of all commonly-used name for the card, in a human-readable format
-     */
-    public String aliasesString() {
-        String allAliases = "";
-        for (String alias : aliases) {
-            allAliases += alias + ", \n";
-        }
-        if (allAliases.length() > 0) {
-            allAliases = allAliases.substring(0, allAliases.length() - 3);
-        }
-        allAliases = "Known as: \n" + allAliases;
-        return allAliases;
     }
 
 }
