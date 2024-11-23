@@ -75,6 +75,10 @@ public class DMCardTester {
         testGetHasSheildTrigger();
         testEquals();
 
+        CardLink link = new CardLink();
+        link.createValidArray();
+        String stub = "Mikon";
+
     }
 
 

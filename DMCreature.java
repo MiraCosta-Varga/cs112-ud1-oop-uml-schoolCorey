@@ -318,6 +318,8 @@ public class DMCreature extends DMCard{
         return result;
     }
 
+
+
     @Override
     public boolean equals(Object other){
         if ((other == null) || (! (other instanceof DMCreature))){
