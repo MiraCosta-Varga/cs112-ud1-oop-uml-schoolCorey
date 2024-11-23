@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="mbnHy9lWTTjCZ4HNXAJT" name="Page-1">
-        <mxGraphModel dx="1144" dy="175" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1980" dy="513" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -17,16 +17,16 @@
                     <mxGeometry y="300" width="340" height="8" as="geometry"/>
                 </mxCell>
                 <mxCell id="6" value="&lt;i&gt;DMCard&lt;/i&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=0;labelBackgroundColor=none;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
-                    <mxGeometry x="535" y="440" width="230" height="698" as="geometry"/>
+                    <mxGeometry x="555" y="440" width="230" height="808" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="&lt;div&gt;- name : String&lt;/div&gt;&lt;div&gt;- aliases : String[]&lt;/div&gt;&lt;div&gt;- civilization : String&lt;br&gt;&lt;/div&gt;&lt;div&gt;- cardType : String&lt;/div&gt;&lt;div&gt;- textbox : String&lt;br&gt;&lt;/div&gt;&lt;div&gt;- rarity : int&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_NONE : int = -1&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_COMMON : int = 0&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_UNCOMMON : int = 1&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_RARE : int = 2&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_VERY_RARE : int = 3&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_SUPER_RARE : int = 4&lt;br&gt;&lt;/div&gt;&lt;div&gt;- cost : int&lt;/div&gt;&lt;div&gt;- hasShieldTrigger : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;rounded=0;labelBackgroundColor=none;" parent="6" vertex="1">
-                    <mxGeometry y="26" width="230" height="234" as="geometry"/>
+                <mxCell id="7" value="&lt;div&gt;- name : String&lt;/div&gt;&lt;div&gt;- civilization : int&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;- CIVILIZATION_DARKNESS: int =0&lt;/div&gt;&lt;div&gt;- CIVILIZATION_FIRE: int =1&lt;/div&gt;&lt;div&gt;- CIVILIZATION_LIGHT: int =2&lt;/div&gt;&lt;div&gt;- CIVILIZATION_NATURE: int =3&lt;/div&gt;&lt;div&gt;- CIVILIZATION_WATER: int =4&lt;/div&gt;&lt;div&gt;- cardType : int&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;- CARDTYPE_CREATURE: int = 0&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;- CARDTYPE_SPELL: int = 1&lt;/div&gt;&lt;/div&gt;&lt;div&gt;- textbox : String&lt;br&gt;&lt;/div&gt;&lt;div&gt;- rarity : int&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_NONE : int = -1&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_COMMON : int = 0&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_UNCOMMON : int = 1&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_RARE : int = 2&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_VERY_RARE : int = 3&lt;br&gt;&lt;/div&gt;&lt;div&gt;- RARITY_SUPER_RARE : int = 4&lt;br&gt;&lt;/div&gt;&lt;div&gt;- cost : int&lt;/div&gt;&lt;div&gt;- hasShieldTrigger : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;- idNum : int&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;rounded=0;labelBackgroundColor=none;" parent="6" vertex="1">
+                    <mxGeometry y="26" width="230" height="324" as="geometry"/>
                 </mxCell>
-                <mxCell id="8" value="&lt;div&gt;+ DMCard()&lt;/div&gt;&lt;div&gt;+ DMCard(name : String, aliases: String[], civilization : String, cardType : String, textbox : String, rarity : int, cost : int, hasSheildTrigger : boolean)&lt;/div&gt;&lt;div&gt;+ DMCard(original : DMCard)&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setName(name : String) : void&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setAliases(aliases : String[]) : bool&lt;/div&gt;&lt;div&gt;+ setCivilization(color : String) : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setCardType (cardType : String) : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setTextbox (textbox : String) : void&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setRarity( rarity : int) : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setCost(cost : int) : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setHasShieldTrigger(hasSheildTrigger : bool) : void&lt;/div&gt;&lt;div&gt;+ setAll(name : String, aliases : String[], civilization : String, cardType : String, textbox : String, rarity : int, cost : int, hasSheildTrigger : boolean) : boolean&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;+ getName : String&lt;/div&gt;&lt;div&gt;+ getAliases : String[]&lt;/div&gt;&lt;div&gt;+ getCivilization : String&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ getCardType : String&lt;/div&gt;&lt;div&gt;+ getTextbox : String&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ getRarity : int&lt;/div&gt;&lt;div&gt;+ getCost : int&lt;/div&gt;&lt;div&gt;+ getHasShieldTrigger : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ toString() : String&lt;/div&gt;&lt;div&gt;+ equals(other : Object) : boolean&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;rounded=0;labelBackgroundColor=none;" parent="6" vertex="1">
-                    <mxGeometry y="260" width="230" height="430" as="geometry"/>
+                <mxCell id="8" value="&lt;div&gt;+ DMCard()&lt;/div&gt;&lt;div&gt;+ DMCard(name : String, civilization : int, cardType : int, textbox : String, rarity : int, cost : int, hasSheildTrigger : boolean, idNum: int)&lt;/div&gt;&lt;div&gt;+ DMCard(original : DMCard)&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setName(name : String) : void&lt;/div&gt;&lt;div&gt;+ setCivilization(color : String) : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setCardType (cardType : String) : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setTextbox (textbox : String) : void&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setRarity( rarity : int) : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setCost(cost : int) : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setHasShieldTrigger(hasSheildTrigger : bool) : void&lt;/div&gt;&lt;div&gt;+ setIdNum(idNum: int) : bool&lt;/div&gt;&lt;div&gt;+ setAll(name : String,&amp;nbsp; civilization : String, cardType : String, textbox : String, rarity : int, cost : int, hasSheildTrigger : boolean, idNum : int) : boolean&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;+ getName : String&lt;/div&gt;&lt;div&gt;+ getCivilization : int&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ getCardType : int&lt;/div&gt;&lt;div&gt;+ getTextbox : String&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ getRarity : int&lt;/div&gt;&lt;div&gt;+ getCost : int&lt;/div&gt;&lt;div&gt;+ getHasShieldTrigger : bool&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ getIdNum&lt;/div&gt;&lt;div&gt;+ toString() : String&lt;/div&gt;&lt;div&gt;+ equals(other : Object) : boolean&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;rounded=0;labelBackgroundColor=none;" parent="6" vertex="1">
+                    <mxGeometry y="350" width="230" height="450" as="geometry"/>
                 </mxCell>
                 <mxCell id="9" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;rounded=0;labelBackgroundColor=none;strokeColor=#D0CEE2;fontColor=#1A1A1A;" parent="6" vertex="1">
-                    <mxGeometry y="690" width="230" height="8" as="geometry"/>
+                    <mxGeometry y="800" width="230" height="8" as="geometry"/>
                 </mxCell>
                 <mxCell id="10" value="DMBattleStats" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=#006EAF;fontColor=#ffffff;fillColor=#1ba1e2;" parent="1" vertex="1">
                     <mxGeometry x="-390" y="70" width="340" height="708" as="geometry"/>
@@ -67,7 +67,7 @@
                 <mxCell id="20" value="Database" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;strokeColor=#006EAF;fillColor=#1ba1e2;fontColor=#ffffff;" parent="1" vertex="1">
                     <mxGeometry x="130" y="10" width="480" height="200" as="geometry"/>
                 </mxCell>
-                <mxCell id="21" value="+ allEvents : RewardEvent[]" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="20" vertex="1">
+                <mxCell id="21" value="+ allEvents : ArrayList&amp;lt;RewardEvent&amp;gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="20" vertex="1">
                     <mxGeometry y="26" width="480" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="22" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;fontColor=#1A1A1A;" parent="20" vertex="1">
@@ -77,15 +77,15 @@
                     <mxGeometry y="60" width="480" height="140" as="geometry"/>
                 </mxCell>
                 <mxCell id="24" value="DMCreature" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="1" vertex="1">
-                    <mxGeometry x="530" y="1210" width="240" height="324" as="geometry"/>
+                    <mxGeometry x="550" y="1300" width="240" height="324" as="geometry"/>
                 </mxCell>
-                <mxCell id="25" value="&lt;div&gt;- power : int&lt;/div&gt;&lt;div&gt;- race : String&lt;br&gt;&lt;/div&gt;&lt;div&gt;- isEvolution : boolean&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="24" vertex="1">
+                <mxCell id="25" value="&lt;div&gt;- power : int&lt;/div&gt;&lt;div&gt;- race : int&lt;br&gt;&lt;/div&gt;&lt;div&gt;- isEvolution : boolean&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="24" vertex="1">
                     <mxGeometry y="26" width="240" height="54" as="geometry"/>
                 </mxCell>
                 <mxCell id="26" value="" style="line;strokeWidth=1;fillColor=#dae8fc;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#6c8ebf;" parent="24" vertex="1">
                     <mxGeometry y="80" width="240" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="27" value="&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ setPower(power : int) : boolean&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ setRace(race : String) : boolean&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ setIsEvolution(isEvolution : boolean) : void&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ setAll(&lt;/div&gt;name : String, aliases : String[], color : String, cardType : String, textbox : String, rarity : int, cost : int, hasSheildTrigger : boolean, power : int, race : String, isEvolution : boolean&lt;span style=&quot;background-color: initial;&quot;&gt;) : boolean&lt;/span&gt;&lt;br&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ getPower() : int&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ getRace() : String&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ getIsEvolution() : boolean&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ toString() : String&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ equals(other : Object) : boolean&lt;/div&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="24" vertex="1">
+                <mxCell id="27" value="&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ setPower(power : int) : boolean&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ setRace(race : int) : boolean&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ setIsEvolution(isEvolution : boolean) : void&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ setAll(&lt;/div&gt;name : String, color : int, cardType : int, textbox : String, rarity : int, cost : int, hasSheildTrigger : boolean, power : int, race : int, isEvolution : boolean&lt;span style=&quot;background-color: initial;&quot;&gt;) : boolean&lt;/span&gt;&lt;br&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ getPower() : int&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ getRace() : int&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ getIsEvolution() : boolean&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ toString() : String&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color);&quot;&gt;+ equals(other : Object) : boolean&lt;/div&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="24" vertex="1">
                     <mxGeometry y="88" width="240" height="236" as="geometry"/>
                 </mxCell>
                 <mxCell id="28" value="Extends" style="endArrow=block;endSize=12;endFill=0;html=1;rounded=0;entryX=0.496;entryY=1.125;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fillColor=#e1d5e7;strokeColor=#736CA8;strokeWidth=3;" parent="1" source="24" target="9" edge="1">
@@ -95,16 +95,16 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="29" value="CardLink" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
-                    <mxGeometry x="540" y="240" width="220" height="110" as="geometry"/>
+                    <mxGeometry x="540" y="240" width="260" height="110" as="geometry"/>
                 </mxCell>
                 <mxCell id="30" value="&lt;div&gt;- validCards: DMCard[139]&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="29" vertex="1">
-                    <mxGeometry y="26" width="220" height="44" as="geometry"/>
+                    <mxGeometry y="26" width="260" height="44" as="geometry"/>
                 </mxCell>
                 <mxCell id="31" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="29" vertex="1">
-                    <mxGeometry y="70" width="220" height="2" as="geometry"/>
+                    <mxGeometry y="70" width="260" height="2" as="geometry"/>
                 </mxCell>
-                <mxCell id="32" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ linkCard(alias : String) : DMCard&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="29" vertex="1">
-                    <mxGeometry y="72" width="220" height="38" as="geometry"/>
+                <mxCell id="32" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;+ objectIsValid(DMCard candidate) : Boolean&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="29" vertex="1">
+                    <mxGeometry y="72" width="260" height="38" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="" style="endArrow=diamondThin;endFill=1;endSize=14;html=1;rounded=0;strokeColor=#736CA8;fontColor=#1A1A1A;strokeWidth=3;exitX=0.003;exitY=0.06;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="2" edge="1">
                     <mxGeometry width="160" relative="1" as="geometry">
@@ -125,7 +125,7 @@
                 <mxCell id="36" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="34" vertex="1">
                     <mxGeometry y="52" width="410" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="37" value="+ linkOpponent(name : String, location : String) : DMOpponent&lt;br&gt;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="34" vertex="1">
+                <mxCell id="37" value="+ objectIsValid(DMOpponent candidate) : Boolean&lt;br&gt;+ linkOpponent(location : String, name : String) : DMOpponent" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="34" vertex="1">
                     <mxGeometry y="60" width="410" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="38" value="" style="endArrow=diamondThin;endFill=1;endSize=14;html=1;rounded=0;strokeColor=#736CA8;fontColor=#1A1A1A;strokeWidth=3;exitX=1.004;exitY=0.009;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="10" edge="1">
@@ -136,18 +136,6 @@
                             <mxPoint x="-10" y="90"/>
                         </Array>
                     </mxGeometry>
-                </mxCell>
-                <mxCell id="39" value="NoSuchCardException" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
-                    <mxGeometry x="880" y="902" width="330" height="130" as="geometry"/>
-                </mxCell>
-                <mxCell id="40" value="- DEFAULT_MESSAGE : String = &quot;Card not found in database.&quot;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="39" vertex="1">
-                    <mxGeometry y="26" width="330" height="44" as="geometry"/>
-                </mxCell>
-                <mxCell id="41" value="" style="line;strokeWidth=1;fillColor=#dae8fc;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#6c8ebf;" parent="39" vertex="1">
-                    <mxGeometry y="70" width="330" height="8" as="geometry"/>
-                </mxCell>
-                <mxCell id="42" value="+ NoSuchCardException()&lt;br&gt;+ NoSuchCardException( cardName : String)" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="39" vertex="1">
-                    <mxGeometry y="78" width="330" height="52" as="geometry"/>
                 </mxCell>
                 <mxCell id="43" value="" style="endArrow=diamondThin;endFill=0;endSize=19;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;strokeWidth=3;fillColor=#e1d5e7;strokeColor=#9673a6;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="6" target="29" edge="1">
                     <mxGeometry width="160" relative="1" as="geometry">
@@ -162,11 +150,11 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="46" value="Exception" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
-                    <mxGeometry x="965" y="840" width="160" height="32" as="geometry"/>
+                    <mxGeometry x="1140" y="840" width="160" height="32" as="geometry"/>
                 </mxCell>
-                <mxCell id="50" value="Extends" style="endArrow=block;endSize=12;endFill=0;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fillColor=#e1d5e7;strokeColor=#736CA8;strokeWidth=3;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="39" target="46" edge="1">
+                <mxCell id="50" value="Extends" style="endArrow=block;endSize=12;endFill=0;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fillColor=#e1d5e7;strokeColor=#736CA8;strokeWidth=3;exitX=0.556;exitY=0.038;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="62" target="46" edge="1">
                     <mxGeometry width="160" relative="1" as="geometry">
-                        <mxPoint x="1054" y="912" as="sourcePoint"/>
+                        <mxPoint x="1085" y="902.0000000000002" as="sourcePoint"/>
                         <mxPoint x="1016.6799999999998" y="826.3520000000001" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
@@ -193,39 +181,69 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="54" value="Throws" style="endArrow=open;endSize=12;dashed=1;html=1;strokeWidth=3;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0.004;entryY=0.065;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#736ca8;rounded=0;fontSize=13;" parent="1" source="29" target="39" edge="1">
-                    <mxGeometry x="-0.1846" width="160" relative="1" as="geometry">
-                        <mxPoint x="640" y="520" as="sourcePoint"/>
-                        <mxPoint x="800" y="520" as="targetPoint"/>
-                        <Array as="points">
-                            <mxPoint x="820" y="323"/>
-                            <mxPoint x="820" y="910"/>
-                        </Array>
-                        <mxPoint as="offset"/>
-                    </mxGeometry>
+                <mxCell id="55" value="ValidLink" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="70" width="240" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="55" value="ValidLink" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
-                    <mxGeometry x="750" y="70" width="160" height="100" as="geometry"/>
+                <mxCell id="56" value="" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="55" vertex="1">
+                    <mxGeometry y="26" width="240" height="26" as="geometry"/>
                 </mxCell>
-                <mxCell id="56" value="" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="55">
-                    <mxGeometry y="26" width="160" height="26" as="geometry"/>
+                <mxCell id="57" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="55" vertex="1">
+                    <mxGeometry y="52" width="240" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="57" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="55">
-                    <mxGeometry y="52" width="160" height="8" as="geometry"/>
+                <mxCell id="58" value="- createValidArray() : void&#10;+ objectIsValid(Object candidate) : Boolean" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="55" vertex="1">
+                    <mxGeometry y="60" width="240" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="58" value="- createValidArray() : void&#10;+ linkObject() : Object" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="55">
-                    <mxGeometry y="60" width="160" height="40" as="geometry"/>
-                </mxCell>
-                <mxCell id="60" value="Extends" style="endArrow=block;endSize=12;endFill=0;html=1;rounded=0;entryX=0.278;entryY=1.048;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;fillColor=#e1d5e7;strokeColor=#736CA8;strokeWidth=3;" edge="1" parent="1" source="29" target="58">
+                <mxCell id="60" value="Extends" style="endArrow=block;endSize=12;endFill=0;html=1;rounded=0;entryX=0.278;entryY=1.048;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;fillColor=#e1d5e7;strokeColor=#736CA8;strokeWidth=3;" parent="1" source="29" target="58" edge="1">
                     <mxGeometry width="160" relative="1" as="geometry">
                         <mxPoint x="720.92" y="221.00000000000023" as="sourcePoint"/>
                         <mxPoint x="719.9999999999999" y="140" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="61" value="Extends" style="endArrow=block;endSize=12;endFill=0;html=1;rounded=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;fillColor=#e1d5e7;strokeColor=#736CA8;strokeWidth=3;" edge="1" parent="1" source="34" target="55">
+                <mxCell id="61" value="Extends" style="endArrow=block;endSize=12;endFill=0;html=1;rounded=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;fillColor=#e1d5e7;strokeColor=#736CA8;strokeWidth=3;" parent="1" source="34" target="55" edge="1">
                     <mxGeometry width="160" relative="1" as="geometry">
                         <mxPoint x="960.9200000000001" y="221.00000000000023" as="sourcePoint"/>
                         <mxPoint x="960" y="140" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="62" value="CardNotValidException" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="900" width="330" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="63" value="- DEFAULT_MESSAGE : String = &quot;Card not found in database.&quot;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="62" vertex="1">
+                    <mxGeometry y="26" width="330" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="64" value="" style="line;strokeWidth=1;fillColor=#dae8fc;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#6c8ebf;" parent="62" vertex="1">
+                    <mxGeometry y="70" width="330" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="65" value="+ CardNotValidException()&lt;br&gt;+ CardNotValidException( cardName: String)&lt;br&gt;+ CardNotValidException(card : DMCard)" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="62" vertex="1">
+                    <mxGeometry y="78" width="330" height="52" as="geometry"/>
+                </mxCell>
+                <mxCell id="66" value="OpponentNotValidException" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="1" vertex="1">
+                    <mxGeometry x="1300" y="900" width="330" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="67" value="- DEFAULT_MESSAGE : String = &quot;Opponent not found in database.&quot;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="66" vertex="1">
+                    <mxGeometry y="26" width="330" height="44" as="geometry"/>
+                </mxCell>
+                <mxCell id="68" value="" style="line;strokeWidth=1;fillColor=#dae8fc;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#6c8ebf;" parent="66" vertex="1">
+                    <mxGeometry y="70" width="330" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="69" value="+ OpponentNotValidException()&lt;br&gt;+ OpponentNotValidException( opponentName: String, opponentLocation : String)" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="66" vertex="1">
+                    <mxGeometry y="78" width="330" height="52" as="geometry"/>
+                </mxCell>
+                <mxCell id="71" value="Extends" style="endArrow=block;endSize=12;endFill=0;html=1;rounded=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;fillColor=#e1d5e7;strokeColor=#736CA8;strokeWidth=3;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="66" target="46" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="1113.48" y="914.94" as="sourcePoint"/>
+                        <mxPoint x="1230" y="882" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="72" value="Throws" style="endArrow=open;endSize=12;dashed=1;html=1;strokeWidth=3;entryX=0.75;entryY=0;entryDx=0;entryDy=0;strokeColor=#736ca8;rounded=0;fontSize=13;" parent="1" source="37" target="66" edge="1">
+                    <mxGeometry x="-0.1846" width="160" relative="1" as="geometry">
+                        <mxPoint x="1275" y="306.02" as="sourcePoint"/>
+                        <mxPoint x="1396.3199999999997" y="893.97" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="1548" y="320"/>
+                            <mxPoint x="1548" y="670"/>
+                        </Array>
+                        <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
             </root>
